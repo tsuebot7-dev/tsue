@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Xatolar jurnali — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header"><h1>🛑 Xatolar jurnali</h1></div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Skrinshot olishda, xonalarni skanerlashda yoki guruh o'zgarishlarini
+    kuzatishda yuzaga kelgan so'nggi xatoliklar shu yerda ko'rinadi
+    (Railway loglariga kirmasdan).
+  </p>
+  {% if errors %}
+  <table>
+    <thead><tr><th>Vaqt</th><th>Kontekst</th><th>Xabar</th></tr></thead>
+    <tbody>
+      {% for e in errors %}
+      <tr>
+        <td style="white-space:nowrap">{{ e.created_at[:16] }}</td>
+        <td><span class="badge red">{{ e.context }}</span></td>
+        <td style="max-width:500px; word-break:break-word">{{ e.message }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--muted)">🎉 Hozircha hech qanday xato qayd etilmagan.</p>
+  {% endif %}
+</div>
+{% endblock %}

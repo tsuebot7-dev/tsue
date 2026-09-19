@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Sarlavha nomlari — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>🏷️ Sarlavha nomlari</h1>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Botda fakultet/bino nomlari xom kalit o'rniga shu yerda ko'rsatilgan
+    chiroyli nomda chiqadi. Format: {"XOM_KALIT": "Chiroyli nom"}.
+  </p>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  {% if request.query_params.get('saved') %}<div class="success">✅ Saqlandi.</div>{% endif %}
+
+  <form method="post" action="/names">
+    <textarea class="code" name="content" spellcheck="false">{{ content }}</textarea>
+    <div class="toolbar">
+      <button class="btn" type="submit">💾 Saqlash</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
