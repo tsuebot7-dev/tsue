@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>{{ title }}</h1>
+  <a class="btn secondary" href="/data">⬅️ Orqaga</a>
+</div>
+
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+{% if request.query_params.get('saved') %}<div class="success">✅ Saqlandi.</div>{% endif %}
+
+<div class="card">
+  <form method="post" action="/file/{{ name }}">
+    <textarea class="code" name="content" spellcheck="false">{{ content }}</textarea>
+    <div class="toolbar">
+      <button class="btn" type="submit">💾 Saqlash</button>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Yoki faylni to'liq almashtiring</h3>
+  <form method="post" action="/file/{{ name }}/upload" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".json" required>
+    <div class="toolbar">
+      <button class="btn" type="submit">⬆️ Yuklash va almashtirish</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
