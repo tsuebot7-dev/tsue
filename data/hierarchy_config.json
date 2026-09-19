@@ -1,0 +1,30 @@
+{
+  "guruhlar": {
+    "levels": [
+      {
+        "pattern": "^[A-Z]+$",
+        "label": "fakultet"
+      },
+      {
+        "pattern": "^\\dKURS$",
+        "label": "kurs"
+      }
+    ]
+  },
+  "ustozlar": {
+    "levels": [
+      {
+        "pattern": "^[A-Z]+$",
+        "label": "fakultet"
+      }
+    ]
+  },
+  "xonalar": {
+    "levels": [
+      {
+        "pattern": "^[A-Z0-9]+$",
+        "label": "bino"
+      }
+    ]
+  }
+}

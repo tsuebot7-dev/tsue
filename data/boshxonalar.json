@@ -1,0 +1,3265 @@
+{
+  "10": {
+    "room_id": 10,
+    "room_name": "1/126",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*10",
+    "busy_slots": [],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "11": {
+    "room_id": 11,
+    "room_name": "1/125(Ural)-35",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*11",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Falsafa (Sem) | I-952/26i | Mustafayev Alimardon"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Dinshunoslik (Sem) | IRB-400/26 | Mustafayev Alimardon"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-912/26 | Suvpo`latov O"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "O`zbekistonning eng yangi tarixi(sem) | I-924/26 | Okyulov Xasan"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy investitsiya (Sem) | MO-30r/25 | Sabirova Lola"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-30r/25 | Giyazova Nilufar"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Agrologistika (Ma) | LG-21/21i | Mannonov Shaxzod"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Agrologistika (Ma) | LG-21/21i | Mannonov Shaxzod"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy til 2 | MO-30r/25 | Giyazova Nilufar"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Tadbirkorlik va innovatsiyalar (Sem) | BBA-87/25 | Imomov Jamshid"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Omborxona logistikasi(Ma) | LG-21/21i | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Omborxona logistikasi(Ma) | LG-21/21i | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Xalqaro marketing (Sem) | PTI-75/23 | Turdiyeva  Shohista"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Amaliy matematika 1 (Sem) | I-906/26 | Mirzamurodov Oltinbek"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Ekonometrika (Sem) | BBA-84/25 | Jumanova Zilola"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Omborxona logistikasi(Sem) | LG-21/21i | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Agrologistika (Sem) | LG-21/21i | Mannonov Shaxzod"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Agrologistika (Sem) | LG-21/21i | Mannonov Shaxzod"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Tadqiqot usullari va ko'nikmalari (Sem) | IRB-75/23 | Irmatova Aziza"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Tadbirkorlik va innovatsiyalar (Sem) | BBA-83/25 | Tashmuxamedova Yayra"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Omborxona logistikasi(Sem) | LG-21/21i | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Sem) | LG-21/21i | Mannonov Shaxzod"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Moliyaviy iqtisodiyot (sem) | I-53/24 | Saidnazarov Firdavs"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Moliyaviy iqtisodiyot (sem) | I-53/24 | Saidnazarov Firdavs"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Global migratsiya va demografiya (Sem) | MO-25/23r | Abdumalikova Guli-ra'no"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MO-25/23r | Xolmurodov Jaxongir"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "12": {
+    "room_id": 12,
+    "room_name": "1/139(Ural)-35",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*12",
+    "busy_slots": [
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Korporativ boshqaruv (Sem) | MNP-84 | Nishanbayeva Dilnoza"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-32r/25 | Abdullayeva Muxlisa (Xorijiy til)"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Statistika (sem) | I-84k/25 | Nuraliev S.S."
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro biznes (Sem) | BBA-11/24r | Janizakova Shaxnoza"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Amaliy matematika 1 (Sem) | I-904/26 | Mirzamurodov Oltinbek"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MI-76/23 | Boymurodov Shohruh"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot 1 (sem) | I-31/25 | Yuldashev G'olibjon"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Global iqtisodiy rivojlanish (Sem) | I-52k/24 | Ravshanov Behzod"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Liderlik (Sem) | BBA-53/24 | Akramova Nazokat"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Liderlik (Sem) | BBA-53/24 | Akramova Nazokat"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | IH-76/23 | ABDUQAXXOROV  AZIZBEK"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | IH-76/23 | ABDUQAXXOROV  AZIZBEK"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot 1 (sem) | I-33/25 | Xadjaev Xabibulla"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Mikroiqtisodiyot 1 (sem) | I-33/25 | Xadjaev Xabibulla"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Omborxona logistikasi(Sem) | LG-51/24 | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Omborxona logistikasi(Sem) | LG-51/24 | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Makroiqtisodiyot-2 (Sem) | I-50k/24 | Choriyev Fazliddin"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "13": {
+    "room_id": 13,
+    "room_name": "1/131(Ural)-100",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*13",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Mikroiqtisodiyot (Ma) | MO-84k/25/MO-85k/25/MO-86k/25 | Umarov Faxriddin"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Korporativ boshqaruv (Ma) | MNP-80/MNP-81/MNP-82 | Kenjayeva Umriya"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy investitsiya (Ma) | MO-84k/25/MO-85k/25/MO-86k/25 | Amonova Nazokat"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro iqtisodiyot (Ma) | MO-11/24r/MO-12/24r/MO-13/24r/MO-14/24r | Kasimova Nargiza"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Xalqaro bank ishi va moliya (Ma) | MO-11/24r/MO-12/24r/MO-13/24r/MO-14/24r | Bazarova Nigora"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "O`zbekistonning eng yangi tarixi(sem) | I-951/26i | Aliyev Tulqin"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Mikroiqtisodiyot (Ma) | MO-33r/25/MO-34r/25/MO-35r/25 | Yuldashev G'olibjon"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon Iqtisodiyoti (Ma) | MO-33r/25/MO-34r/25/MO-35r/25 | Galoyan Diana"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Audit (Ma) | MO-50/24/MO-51/24/MO-52/24 | Botirov Laziz"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Soft skills (Ma) | BBA-76/23i/LG-76/23i/IH-70/23i | Xamroqulov Mirabbos"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-913/26 | Suvpo`latov O"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Mikroiqtisodiyot (Ma) | MO-33r/25/MO-34r/25/MO-35r/25 | Yuldashev G'olibjon"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon Iqtisodiyoti (Ma) | MO-33r/25/MO-34r/25/MO-35r/25 | Galoyan Diana"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Tadbirkorlik va innovatsiyalar (Ma) | BBA-83/25/BBA-84/25/BBA-85/25 | Tashmuxamedova Yayra"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "O`zbekistonning eng yangi tarixi (Ma) | I-920/26/I-921/26/I-922/26 | Rashidov Oybek"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Diskret tuzilmalar (Ma) | II-31/25r/II-32/25r | Abduraxmanova Yu (Mat.kaf)"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Infratuzilma iqtisodiyoti (Ma) | I-20/23r/I-21/23r | Zaxarova Irina"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Soft skills (Ma) | BBA-76/23i/LG-76/23i/IH-70/23i | Xamroqulov Mirabbos"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Oilaviy tadbirkorlik (Ma) | BBA-83/25/BBA-84/25/BBA-85/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot (Sem) | MNP-86 | Suyunova Dilfuza"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Veb tizimlari (Ma) | AT-51/24/AT-52/24/AT-53/24/AT-54/24 | Jonqobilov Mirjalol"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Dinshunoslik (Ma) | IB-902/26/IB-903/26/IB-904/26 | Qurbonaliyeva Xulkar"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Chiziqli algebra (Ma) | IB-84/25/IB-85/25/IB-86/25 | Qurbonov Odiljon"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Diskret tuzilmalar (Ma) | AT-81/25/AT-82/25/AT-83/25 | Xodjaboyeva Dilbar"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy investitsiya (Ma) | MO-84k/25/MO-85k/25/MO-86k/25 | Amonova Nazokat"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Marketing (Ma) | MNP-80/MNP-81/MNP-82 | Akramov Toxir"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Tadbirkorlik va innovatsiyalar (Ma) | BBA-80/25/BBA-81/25/BBA-82/25 | Abdumurotov Sh."
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Chiziqli algebra (Ma) | II-84/25/II-85/25/II-86/25 | Saipnazarov Shaylov"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Chiziqli algebra (Ma) | II-81/25/II-82/25/II-83/25 | Saipnazarov Shaylov"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Chiziqli algebra (Ma) | II-31/25r/II-32/25r | Jabborov Nasriddin"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Xalqaro marketing (Ma) | I-75/23/I-76/23/I-77/23 | Bobojonov Baxrombek"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "14": {
+    "room_id": 14,
+    "room_name": "1/132(Ural)-44",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*14",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy til 2 | MO-86/25 | Azimova Nilufar"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-86/25 | Azimova Nilufar"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Amaliy matematika 1 (Sem) | I-908/26 | Mirzamurodov Oltinbek"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Amaliy matematika 1 (Sem) | I-925/26 | Fayziyev Javlon"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-403/26 | Erxanova Karima"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot (Sem) | MNP-88 | Abduxakimov Eldor"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-406/26 | Abduqodirova Kamola"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Global migratsiya va demografiya (Ma) | MO-25/23r/MO-26/23r | Abdumalikova Guli-ra'no"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Global migratsiya va demografiya (Ma) | MO-25/23r/MO-26/23r | Abdumalikova Guli-ra'no"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy til 2 | MO-80/25 | Babaeva Komila"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-80/25 | Babaeva Komila"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Jahon Iqtisodiyoti (Sem) | MO-38/25i | O'rinov Sarvar"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Jahon Iqtisodiyoti (Sem) | MO-38/25i | O'rinov Sarvar"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (MA) | MNP-25/23r/MNP-26/23r | Karriev Karimbergan"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Global iqtisodiy rivojlanish (Sem) | I-51/24 | Fayziyeva Dilso'z"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-80/25 | Abdulxakimov Sirojiddin"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-80/25 | Abdulxakimov Sirojiddin"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Sem) | LG-51/24 | Nurillaeva Zarrina (IH)"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Agrologistika (Sem) | LG-51/24 | Bozorov Saidjon"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Tadqiqot usullari va ko'nikmalari (Sem) | IRB-20/23r | Irmatova Aziza"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "HR auditi va konsaltingi (sem) | IRB-20/23r | Bakiyeva Iroda"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (MA) | IRB-20/23r | Xolmurodov Jaxongir"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Oilaviy tadbirkorlik (Sem) | BBA-87/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-84/25 | Xudoyorova Ziyoda"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy til 2 | MO-84/25 | Xudoyorova Ziyoda"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Moliya (Sem) | MNP-54/24 | Abdullayeva Madina"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Makroiqtisodiyot-2 (Sem) | I-51/24 | Maxammatova Malika"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Makroiqtisodiyot-2 (Sem) | I-51/24 | Maxammatova Malika"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "15": {
+    "room_id": 15,
+    "room_name": "1/133(Ural)-44",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*15",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy til 2 | MO-33r/25 | Nutfiyeva Dildora"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-87/25 | Raximova Shirin"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Dinshunoslik (Ma) | IRB-950/26i | Asadova Dilnoza"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-909/26 | Suvpo`latov O"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-924/26 | Muxamedjanova Maxfuza"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Xalqaro marketing (Sem) | I-20/23r | Abdurashidova Nigora"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot (Sem) | MNP-87 | Suyunova Dilfuza"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Amaliy matematika 1 (Sem) | I-913/26 | Fayziyev Javlon"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (MA) | MNP-25/23r/MNP-26/23r | Karriev Karimbergan"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Liderlik (Sem) | BBA-51/24 | Akramova Nazokat"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Falsafa (Sem) | MNP-38i/25 | Mustafayev Alimardon"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Falsafa (Sem) | MNP-38i/25 | Mustafayev Alimardon"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy til 2 | MO-82/25 | Ibragimova Sevara (Xorijiy til)"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro bank ishi va moliya (Sem) | MO-52/24 | Zayniddinov Bunyod"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Falsafa (Sem) | I-450/26i | Mustafayev Alimardon"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Biznes strategiyasi (Sem) | BBA-51/24 | Erkinxojiyev Ismoil"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-83/25 | Tursunov Xusniddin"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-83/25 | Ibragimova Sevara (Xorijiy til)"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xalqaro iqtisodiyot (Sem) | MO-54/24 | Qulmanov Toshmurod"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Audit (Sem) | MO-54/24 | Mamatqulov Xaybulla"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Global migratsiya va demografiya (Sem) | MO-26/23r | Abdumalikova Guli-ra'no"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MO-26/23r | Xolmurodov Jaxongir"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Global iqtisodiy rivojlanish (Sem) | BB-75/23 | Raxmonov Bеkzod"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20",
+        "info": "Global iqtisodiy rivojlanish (Sem) | BB-75/23 | Raxmonov Bеkzod"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Biznes asoslari 2 (Sem) | BBA-81/25 | Aytieva Sevara"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy til 2 | MO-82/25 | Ibragimova Sevara (Xorijiy til)"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Audit (Sem) | MO-54/24 | Mamatqulov Xaybulla"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Global migratsiya va demografiya (Sem) | MO-26/23r | Abdumalikova Guli-ra'no"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MO-77/23 | Jaloliddinov Anvar"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MO-77/23 | Jaloliddinov Anvar"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "16": {
+    "room_id": 16,
+    "room_name": "1/134(Ural)-100",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*16",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Oilaviy tadbirkorlik (Ma) | BBA-83/25/BBA-84/25/BBA-85/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Falsafa (Ma) | MNP-83/MNP-84/MNP-85 | Isomiddinov Yunus"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xalqaro bank ishi va moliya (Ma) | MO-53/24/MO-54/24/MO-55/24 | Abdukayumov Avduvaxid"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro bank ishi va moliya (Ma) | MO-53/24/MO-54/24/MO-55/24 | Abdukayumov Avduvaxid"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Diskret tuzilmalar (Ma) | AT-81/25/AT-82/25/AT-83/25 | Xodjaboyeva Dilbar"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Jahon Iqtisodiyoti (Ma) | IH-25/23r | Xabibullayeva Nargiza Shaxsuvarovna"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Mikroiqtisodiyot (Ma) | MNP-86/MNP-87/MNP-88 | Suyunova Dilfuza"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot (Ma) | BBA-86/25/BBA-87/25/BBA-88/25 | Maxtimova Zarafshon"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Tadbirkorlik va innovatsiyalar (Ma) | BBA-86/25/BBA-87/25/BBA-88/25 | Imomov Jamshid"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro iqtisodiyot (Ma) | MO-53/24/MO-54/24/MO-55/24 | Qulmanov Toshmurod"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Korxona iqtisodiy xavfsizligi (Ma) | IH-75/23/IH-76/23 | Djumanov Turat"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Korxona iqtisodiy xavfsizligi (Ma) | IH-75/23/IH-76/23 | Djumanov Turat"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Jahon Iqtisodiyoti (Ma) | IH-75/23/IH-76/23 | Zayniddinov Ruxiddin"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Mikroiqtisodiyot (Sem) | MNP-86 | Suyunova Dilfuza"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Marketing (Ma) | MNP-80/MNP-81/MNP-82 | Akramov Toxir"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Oilaviy tadbirkorlik (Ma) | BBA-86/25/BBA-87/25/BBA-88/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Ma'lumotlar bazasi (Ma) | IB-84/25/IB-85/25/IB-86/25 | Absalomova Go`zal"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-951/26i | Saydaliyeva Dilrabo Baxriddin qizi"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Statistika nazariyasi (Ma) | RST-83/25/RST-84/25/RST-85/25 | Sayfullayev S."
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Tadbirkorlik va innovatsiyalar (Ma) | BBA-86/25/BBA-87/25/BBA-88/25 | Imomov Jamshid"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Oilaviy tadbirkorlik (Ma) | BBA-86/25/BBA-87/25/BBA-88/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Marketing (Ma) | MR-82/25/MR-83/25/MR-84/25 | Abduxalilova Laylo"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Ekonometrika (Ma) | RST-83/25/RST-84/25/RST-85/25 | Isakova Naima"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Chiziqli algebra (Ma) | IB-81/25/IB-82/25/IB-83/25 | Saipnazarov Shaylov"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Mikroiqtisodiyot (Ma) | MNP-86/MNP-87/MNP-88 | Suyunova Dilfuza"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot (Ma) | LG-83/25/LG-84/25/LG-85/25 | Kasimov Azamat"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Tadbirkorlik va innovatsiyalar (Ma) | BBA-83/25/BBA-84/25/BBA-85/25 | Tashmuxamedova Yayra"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-904/26 | Tashmatov Shuxratdjan"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Xalqaro bank ishi va moliya (Ma) | MO-11/24r/MO-12/24r/MO-13/24r/MO-14/24r | Bazarova Nigora"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Iqtisodiyot nazariyasi 1 (Ma) | RST-900/26/RST-901/26/RST-902/26 | Mamaraximov Bеkzod"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "17": {
+    "room_id": 17,
+    "room_name": "1/135(Ural)-50",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*17",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy til 2 | MO-33r/25 | Nutfiyeva Dildora"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Ma) | LG-51/24/LG-52/24 | Nurillaeva Zarrina (IH)"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Omborxona logistikasi(Ma) | LG-51/24/LG-52/24 | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Omborxona logistikasi(Ma) | LG-51/24/LG-52/24 | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon Iqtisodiyoti (Ma) | MO-38/25i/MO-39/25i | Galoyan Diana"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Oilaviy tadbirkorlik (Sem) | BBA-85/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Oilaviy tadbirkorlik (Sem) | BBA-85/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Amaliy matematika 1 (Sem) | I-905/26 | Mirzamurodov Oltinbek"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-901/26 | Tashmatov Shuxratdjan"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Amaliy matematika 1 (Sem) | I-912/26 | Fayziyev Javlon"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Ekonometrika (Sem) | LG-82/25 | Toxirova Zarifa"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Logistikani boshqarish (Sem) | LG-82/25 | Mannopova Feruza"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Omborxona logistikasi(Sem) | LG-11/24r | Turaev Nurbek"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Omborxona logistikasi(Sem) | LG-11/24r | Turaev Nurbek"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Xalqaro bank ishi va moliya (Sem) | MO-57/24 | Sattorova Nasiba"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Global iqlim o`zgarishi (sem) | YaI-76/23 | Abduraxmanova Muqaddas"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon Iqtisodiyoti (Sem) | MO-39/25i | O'rinov Sarvar"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon Iqtisodiyoti (Sem) | MO-39/25i | O'rinov Sarvar"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Sem) | LG-11/24r | Nurillaeva Zarrina (IH)"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Agrologistika (Ma) | LG-11/24r | Boboxo'jayev G'iyosiddin"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MO-76/23 | Jaloliddinov Anvar"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (SEM) | MO-76/23 | Jaloliddinov Anvar"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Marketing (sem) | MNP-80k | Valiyeva Aziza"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Oilaviy tadbirkorlik (Sem) | BBA-84/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xalqaro bank ishi va moliya (Sem) | MO-50/24 | Abdukayumov Avduvaxid"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro iqtisodiyot (Sem) | MO-50/24 | Qulmanov Toshmurod"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Sem) | LG-21/21i | Mannonov Shaxzod"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Jahon Iqtisodiyoti (Sem) | I-70k/23 | Eshboev Mirjalol"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "18": {
+    "room_id": 18,
+    "room_name": "1/136(Ural)SH-30",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*18",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-84k/25 | Zayniddinov Ruxiddin"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-910/26 | Sherkulova Nodirabegim"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-926/26 | Saydaliyeva Dilrabo Baxriddin qizi"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-908/26 | Suvpo`latov O"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-902/26 | Muxamedjanova Maxfuza"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Falsafa (Sem) | MNP-88 | Abdullayev Azam"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-89k/25 | Ashirova Gulchexra"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-89k/25 | Ashirova Gulchexra"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro bank ishi va moliya (Sem) | MO-51/24 | Abdukayumov Avduvaxid"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Audit (Sem) | MO-51/24 | Botirov Laziz"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Global iqtisodiyot va hududiy rivojlanish (sem) | ShI-75/23 | Abdalova Z."
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-87k/25 | Istamova Gulnoza"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Moliya (Sem) | MNP-55/24 | Kimsanboyeva Maftuna"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Marketing (sem) | BBA-21/24i | Usmonova Diyora"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Marketing (sem) | BBA-21/24i | Usmonova Diyora"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Korxona iqtisodiy xavfsizligi (Sem) | IH-75/23 | Djumanov Turat"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Korxona iqtisodiy xavfsizligi (Sem) | IH-75/23 | Djumanov Turat"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-85/25 | Tursunov Xusniddin"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy investitsiya (Sem) | MO-85/25 | Iskandarova Dilorom"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Agrologistika (Sem) | LG-11/24r | Boboxo'jayev G'iyosiddin"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Agrologistika (Sem) | LG-11/24r | Boboxo'jayev G'iyosiddin"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Ko‘nikmaga asoslangan ta’lim (soft skills) (sem) | I-71k/23 | Bazarov Zakir"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "19": {
+    "room_id": 19,
+    "room_name": "1/137(Ural)-50",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*19",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon Iqtisodiyoti (Ma) | MO-38/25i/MO-39/25i | Galoyan Diana"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy investitsiya (Sem) | MO-86k/25 | Shavkatov Nodir"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Amaliy matematika 1 (Sem) | IRB-400/26 | Mamurov Igamnazar"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Iqtisodiy ta'limotlar tarixi (Sem) | I-402/26 | Abdullayeva Madina (Fundamental)"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Amaliy matematika 1 (Sem) | IRB-950/26i | Madatova F."
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-86/25 | O'rinov Sarvar"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Jahon iqtisodiyoti 1 (Sem) | MO-86/25 | O'rinov Sarvar"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "HR auditi va konsaltingi (sem) | IRB-20/23r | Bakiyeva Iroda"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20",
+        "info": "Tadbirkorlik faoliyatida biznes-rejalashtirish (MA) | IRB-20/23r | Xolmurodov Jaxongir"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Logistika asoslari 2 (Sem) | LG-80/25 | Yaxshiyev Shahzod"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Ekonometrika (Sem) | LG-80/25 | Xamdamov Isakjan"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy investitsiya (Sem) | MO-86/25 | Iskandarova Dilorom"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Oilaviy tadbirkorlik (Sem) | BBA-86/25 | Narzullayev Shodiyor"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Ma) | LG-51/24/LG-52/24 | Nurillaeva Zarrina (IH)"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Barqaror biznes strategiyasi (sem) | BB-75/23 | Aripov Abdulaziz"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy til 2 | MO-83k/25 | Abdullayeva Aziza (Xorijiy til)"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-83k/25 | Abdullayeva Aziza (Xorijiy til)"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy investitsiya (Sem) | MO-86k/25 | Shavkatov Nodir"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Mikroiqtisodiyot (Sem) | MNP-81 | Suyunova Dilfuza"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Xalqaro inson resurslarini boshqarish (Sem) | BBA-21/24i | Xoliyorova Shohista"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Xalqaro inson resurslarini boshqarish (Sem) | BBA-21/24i | Xoliyorova Shohista"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Barqaror biznes strategiyasi (sem) | BB-75/23 | Aripov Abdulaziz"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "20": {
+    "room_id": 20,
+    "room_name": "1/138(Ural)-50",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*20",
+    "busy_slots": [
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-85k/25 | Abdullayeva Aziza (Xorijiy til)"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-39/25i | Ibragimova Sevara (Xorijiy til)"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xorijiy til 2 | MO-39/25i | Ibragimova Sevara (Xorijiy til)"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Agrologistika (Ma) | LG-51/24/LG-52/24 | Bozorov Saidjon"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Agrologistika (Ma) | LG-51/24/LG-52/24 | Bozorov Saidjon"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Agrologistika (Sem) | LG-52/24 | Bozorov Saidjon"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Global iqtisodiy rivojlanish (Sem) | PTI-75/23 | Sharipov N"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Jahon Iqtisodiyoti (Ma) | MO-38/25i/MO-39/25i | Galoyan Diana"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Mikroiqtisodiyot (Ma) | MO-38/25i/MO-39/25i | Najmiddinov Yahyo"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Xalqaro savdo va xalqaro shartnomalar (Sem) | LG-51/24 | Nurillaeva Zarrina (IH)"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20",
+        "info": "Xorijiy investitsiya (Sem) | MO-80k/25 | Imomov Xamdilla"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-80k/25 | Xasanova Zarina"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20",
+        "info": "Statistika (sem) | IRB-85/25 | Nabiyeva Durdona"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20",
+        "info": "Moliyaviy iqtisodiyot (sem) | I-51/24 | Saidnazarov Firdavs"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50",
+        "info": "Moliyaviy iqtisodiyot (sem) | I-51/24 | Saidnazarov Firdavs"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20",
+        "info": "Iqtisodiyot nazariyasi 1 (Sem) | IRB-903/26 | Fayziyeva Dilso'z"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50",
+        "info": "Global iqtisodiy rivojlanish (Sem) | PTI-75/23 | Sharipov N"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50",
+        "info": "Xorijiy til 2 | MO-85k/25 | Abdullayeva Aziza (Xorijiy til)"
+      }
+    ],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  },
+  "1": {
+    "room_id": 1,
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*1",
+    "error": "Simulyatsiya qilingan tarmoq xatosi"
+  },
+  "2": {
+    "room_id": 2,
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*2",
+    "error": "Simulyatsiya qilingan tarmoq xatosi"
+  },
+  "3": {
+    "room_id": 3,
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*3",
+    "error": "Simulyatsiya qilingan tarmoq xatosi"
+  },
+  "4": {
+    "room_id": 4,
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*4",
+    "error": "Simulyatsiya qilingan tarmoq xatosi"
+  },
+  "5": {
+    "room_id": 5,
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*5",
+    "error": "Simulyatsiya qilingan tarmoq xatosi"
+  },
+  "6": {
+    "room_id": 6,
+    "room_name": "",
+    "url": "https://tsue.edupage.org/timetable/view.php?num=94&classroom=*6",
+    "busy_slots": [],
+    "free_slots": [
+      {
+        "day": "Mn",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Mn",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Mn",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Mn",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Mn",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Mn",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Mn",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Mn",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Tu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Tu",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Tu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Tu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Tu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Tu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Tu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Tu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Wed",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Wed",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Wed",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Wed",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Wed",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Wed",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Wed",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Wed",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Thu",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Thu",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Thu",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Thu",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Thu",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Thu",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Thu",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Thu",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Fri",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Fri",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Fri",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Fri",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Fri",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Fri",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Fri",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Fri",
+        "period": 8,
+        "time": "19:00-20:20"
+      },
+      {
+        "day": "Sat",
+        "period": 1,
+        "time": "8:00-9:20"
+      },
+      {
+        "day": "Sat",
+        "period": 2,
+        "time": "9:30-10:50"
+      },
+      {
+        "day": "Sat",
+        "period": 3,
+        "time": "11:00-12:20"
+      },
+      {
+        "day": "Sat",
+        "period": 4,
+        "time": "13:00-14:20"
+      },
+      {
+        "day": "Sat",
+        "period": 5,
+        "time": "14:30-15:50"
+      },
+      {
+        "day": "Sat",
+        "period": 6,
+        "time": "16:00-17:20"
+      },
+      {
+        "day": "Sat",
+        "period": 7,
+        "time": "17:30-18:50"
+      },
+      {
+        "day": "Sat",
+        "period": 8,
+        "time": "19:00-20:20"
+      }
+    ]
+  }
+}

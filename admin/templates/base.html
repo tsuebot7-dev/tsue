@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}TSUE Bot Admin{% endblock %}</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --bg: #f5f6fa;
+    --sidebar-bg: #111827;
+    --sidebar-text: #d1d5db;
+    --sidebar-active: #1f2937;
+    --card: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar .brand {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #ffffff1a;
+    margin-bottom: 10px;
+  }
+  .sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 11px 20px;
+    font-size: 14px;
+    transition: background 0.15s, color 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar nav a:hover { background: #ffffff0d; color: #fff; }
+  .sidebar nav a.active {
+    background: var(--sidebar-active);
+    color: #fff;
+    border-left-color: var(--primary);
+    font-weight: 600;
+  }
+  .sidebar .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    padding: 16px 20px 6px;
+  }
+  main {
+    flex: 1;
+    padding: 32px 36px;
+    max-width: 1100px;
+  }
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .page-header h1 { font-size: 22px; margin: 0; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .stat-card h3 { margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 500; }
+  .stat-card .count { font-size: 30px; font-weight: 700; color: var(--primary); }
+  .stat-card .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .stat-card a.btn { display: inline-block; margin-top: 12px; }
+  .btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn:hover { background: var(--primary-dark); }
+  .btn.secondary { background: #e5e7eb; color: var(--text); }
+  .btn.danger { background: #fee2e2; color: #b91c1c; }
+  textarea, input[type=text], input[type=search] {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  textarea.code {
+    min-height: 480px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    resize: vertical;
+  }
+  .error {
+    background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca;
+    padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; font-size: 14px;
+  }
+  .success {
+    background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;
+    padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; font-size: 14px;
+  }
+  .info {
+    background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe;
+    padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; font-size: 14px;
+  }
+  form.inline { display: inline; }
+  .toolbar { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table th, table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  table th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; }
+  table tr:hover { background: #fafafa; }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .badge.green { background: #dcfce7; color: #166534; }
+  .badge.red { background: #fee2e2; color: #b91c1c; }
+  .pagination { display: flex; gap: 8px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand">📅 TSUE Bot Admin</div>
+  <nav>
+    <a href="/dashboard" class="{{ 'active' if active == 'dashboard' else '' }}">📊 Statistika</a>
+    <a href="/data" class="{{ 'active' if active == 'data' else '' }}">📁 Ma'lumotlarni yangilash</a>
+    <a href="/users" class="{{ 'active' if active == 'users' else '' }}">👥 Foydalanuvchilar</a>
+    <a href="/groups" class="{{ 'active' if active == 'groups' else '' }}">👨‍👩‍👧‍👦 Guruhlar</a>
+    <a href="/broadcast" class="{{ 'active' if active == 'broadcast' else '' }}">📢 Reklama yuborish</a>
+    <a href="/import" class="{{ 'active' if active == 'import' else '' }}">📥 Eski botdan import</a>
+    <div class="section-label">Sozlamalar</div>
+    <a href="/names" class="{{ 'active' if active == 'names' else '' }}">🏷️ Sarlavha nomlari</a>
+    <a href="/hierarchy" class="{{ 'active' if active == 'hierarchy' else '' }}">⚙️ Ierarxiya</a>
+    <a href="/start-message" class="{{ 'active' if active == 'start-message' else '' }}">💬 /start xabari</a>
+    <a href="/errors" class="{{ 'active' if active == 'errors' else '' }}">🛑 Xatolar jurnali</a>
+    <a href="/admins" class="{{ 'active' if active == 'admins' else '' }}">🔑 Adminlar</a>
+  </nav>
+</aside>
+<main>
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
