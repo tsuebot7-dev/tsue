@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Guruhlar — TSUE Bot Admin{% endblock %}
+{% block content %}
+{% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('groups') == 'edit' %}
+<div class="page-header">
+  <h1>👨‍👩‍👧‍👦 Guruhlar (avtomatik jadval)</h1>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Bu yerda botni o'z Telegram guruhiga qo'shib, avtomatik dars jadvali
+    yuborishni sozlagan guruhlar ko'rinadi. Guruh a'zolari buni guruh
+    ichida <code>/start</code> buyrug'i orqali o'zlari sozlaydi. Har bir
+    guruh qatoridagi "💬 Yozishma" tugmasi orqali o'sha guruhdagi
+    yozishmani (avtomatik jadval postlari, a'zolarning botga yozgan
+    xabarlari va h.k.) ko'rish mumkin.
+  </p>
+  <p style="color:var(--muted); font-size:13px; margin-bottom:0">
+    ⚠️ Eslatma: agar botning @BotFather'dagi "Group Privacy" sozlamasi
+    o'chirilmagan (standart) bo'lsa, bot guruhda faqat buyruqlarni va
+    o'ziga yo'llangan/mention qilingan xabarlarni ko'radi - a'zolarning
+    o'zaro oddiy suhbatini emas. Guruhdagi TO'LIQ yozishmani ko'rish
+    uchun @BotFather'da botga <code>/setprivacy</code> -&gt;
+    <code>Disable</code> qilish kerak.
+  </p>
+</div>
+
+<form method="post" action="/groups/broadcast" enctype="multipart/form-data" id="broadcast-form">
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">Jami: {{ groups|length }} ta guruh</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px"><input type="checkbox" id="select-all" onclick="document.querySelectorAll('.group-check').forEach(c => c.checked = this.checked)"></th>
+        <th>Guruh nomi</th>
+        <th>Jadval</th>
+        <th>Kunlar</th>
+        <th>Vaqt</th>
+        <th>Oxirgi yuborilgan</th>
+        <th>Holat</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in groups %}
+      <tr>
+        <td><input type="checkbox" class="group-check" name="selected_groups" value="{{ g.chat_id }}" form="broadcast-form"></td>
+        <td>{{ g.chat_title }}</td>
+        <td>{{ g.name }}</td>
+        <td>{{ g.days_display }}</td>
+        <td>{{ g.post_time }}</td>
+        <td>{{ g.last_sent_date or '-' }}</td>
+        <td>
+          {% if g.is_active %}
+            <span class="badge green">Faol</span>
+          {% else %}
+            <span class="badge red">To'xtatilgan</span>
+          {% endif %}
+        </td>
+        <td style="white-space:nowrap">
+          <a class="btn secondary" href="/groups/{{ g.chat_id }}/chat">💬 Yozishma</a>
+          {% if can_edit %}
+          <form class="inline" method="post" action="/groups/{{ g.chat_id }}/toggle">
+            {% if g.is_active %}
+              <button class="btn secondary" type="submit">To'xtatish</button>
+            {% else %}
+              <button class="btn secondary" type="submit">Faollashtirish</button>
+            {% endif %}
+          </form>
+          <form class="inline" method="post" action="/groups/{{ g.chat_id }}/delete" onsubmit="return confirm('Rostdan ham o\'chirilsinmi?')">
+            <button class="btn danger" type="submit">O'chirish</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8" style="color:var(--muted)">Hozircha hech qanday guruh sozlanmagan.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if can_edit %}
+<div class="card">
+  <h3 style="margin-top:0">📢 Tanlangan guruhlarga xabar yuborish</h3>
+  <p style="color:var(--muted); margin-top:0">
+    Yuqoridagi jadvalda kerakli guruhlarni belgilang (yoki jadval
+    sarlavhasidagi katakcha bilan hammasini tanlang). Matn, rasm yoki
+    video — birortasini yoki barchasini birga yuborishingiz mumkin.
+  </p>
+  {% if group_broadcast_status %}<div class="success">{{ group_broadcast_status }}</div>{% endif %}
+  {% if group_broadcast_error %}<div class="error">{{ group_broadcast_error }}</div>{% endif %}
+
+  <textarea name="text" rows="4" placeholder="Xabar matni (ixtiyoriy, agar rasm/video bilan birga izoh sifatida ham ishlatiladi)..."></textarea>
+  <div class="toolbar">
+    <label style="font-size:14px; color:var(--muted)">🖼️ Rasm:</label>
+    <input type="file" name="photo" accept="image/*">
+  </div>
+  <div class="toolbar">
+    <label style="font-size:14px; color:var(--muted)">🎬 Video:</label>
+    <input type="file" name="video" accept="video/*">
+  </div>
+  <div class="toolbar">
+    <label style="font-size:14px; color:var(--muted)">📎 Fayl/hujjat:</label>
+    <input type="file" name="document">
+  </div>
+  <div class="toolbar">
+    <button class="btn" type="submit">📤 Tanlangan guruhlarga yuborish</button>
+  </div>
+</div>
+{% endif %}
+</form>
+{% endblock %}

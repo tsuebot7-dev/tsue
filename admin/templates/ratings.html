@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Xizmat reytingi — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>⭐ Xizmat reytingi</h1>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Foydalanuvchi o'z guruhining dars jadvalini <b>birinchi marta</b> ko'rgandan
+    keyin, xizmatni 1 dan 5 yulduzgacha baholashni so'rab, avtomatik xabar
+    yuboriladi (har bir foydalanuvchiga faqat bir marta).
+  </p>
+</div>
+
+<div class="grid">
+  <div class="stat-card">
+    <h3>O'rtacha baho</h3>
+    <div class="count">{{ stats.average if stats.average is not none else '—' }}{% if stats.average is not none %} <span style="font-size:18px">/ 5 ⭐</span>{% endif %}</div>
+    <div class="meta">{{ stats.total_rated }} ta baho asosida</div>
+  </div>
+  <div class="stat-card">
+    <h3>Baholaganlar</h3>
+    <div class="count">{{ stats.total_rated }}</div>
+    <div class="meta">foydalanuvchi yulduz bosgan</div>
+  </div>
+  <div class="stat-card">
+    <h3>So'rov yuborilganlar</h3>
+    <div class="count">{{ stats.total_prompted }}</div>
+    <div class="meta">jami taklif qilingan</div>
+  </div>
+  <div class="stat-card">
+    <h3>Javob berish darajasi</h3>
+    <div class="count">{{ ((stats.total_rated / stats.total_prompted * 100) | round(1)) if stats.total_prompted else 0 }}%</div>
+    <div class="meta">so'ralganlardan baholaganlar</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Yulduzlar bo'yicha taqsimot</h3>
+  {% if stats.total_rated %}
+  <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+    {% for n in [5, 4, 3, 2, 1] %}
+    {% set cnt = stats.distribution[n] %}
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div style="width:52px; flex-shrink:0; font-size:13px; color:var(--muted); text-align:right;">{{ n }} ⭐️</div>
+      <div style="flex:1; background:var(--bg); border-radius:8px; overflow:hidden; height:14px;">
+        <div style="height:100%; border-radius:8px; background:linear-gradient(135deg, var(--primary), var(--primary-dark)); width:{{ (cnt / max_bucket * 100) if max_bucket else 0 }}%;"></div>
+      </div>
+      <div style="width:36px; flex-shrink:0; font-size:13px; color:var(--muted);">{{ cnt }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:var(--muted)">Hali hech kim baholamagan.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Kim nechi yulduz bosgan</h3>
+  {% if ratings %}
+  <table>
+    <thead><tr><th>Foydalanuvchi</th><th>Baho</th><th>Sana</th></tr></thead>
+    <tbody>
+      {% for r in ratings %}
+      <tr>
+        <td>
+          {{ (r.first_name or '') ~ ' ' ~ (r.last_name or '') }}
+          {% if r.username %}<span style="color:var(--muted)">@{{ r.username }}</span>{% endif %}
+          <span style="color:var(--muted); font-size:12px">· ID: {{ r.user_id }}</span>
+        </td>
+        <td><span class="badge green">{{ r.rating }} ⭐️</span></td>
+        <td style="white-space:nowrap; color:var(--muted)">{{ r.rated_at[:16] if r.rated_at else '-' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    {% if page > 0 %}
+      <a class="btn secondary" href="/ratings?page={{ page - 1 }}">⬅️ Oldingi</a>
+    {% endif %}
+    {% if has_next %}
+      <a class="btn secondary" href="/ratings?page={{ page + 1 }}">Keyingi ➡️</a>
+    {% endif %}
+  </div>
+  {% else %}
+  <p style="color:var(--muted)">Hali hech kim baholamagan.</p>
+  {% endif %}
+</div>
+{% endblock %}

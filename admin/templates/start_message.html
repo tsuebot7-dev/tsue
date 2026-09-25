@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}/start xabari — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header"><h1>💬 /start xabari</h1></div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Foydalanuvchi botga <code>/start</code> yuborganda ko'rsatiladigan
+    matn. Bo'sh qoldirsangiz, standart matn (foydalanuvchi tili
+    bo'yicha O'zbekcha/Русский) ko'rsatiladi. O'zingiz matn kiritsangiz,
+    u BARCHA foydalanuvchilarga (tildan qat'iy nazar) shu holicha
+    ko'rsatiladi.
+  </p>
+
+  {% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('start_message') == 'edit' %}
+  {% if request.query_params.get('saved') %}<div class="success">✅ Saqlandi.</div>{% endif %}
+  {% if not can_edit %}<div class="info">🔒 Sizda faqat ko'rish huquqi bor.</div>{% endif %}
+
+  <form method="post" action="/start-message">
+    <textarea name="text" rows="8" placeholder="Standart matn ishlatiladi..." {% if not can_edit %}readonly{% endif %}>{{ current or '' }}</textarea>
+    {% if can_edit %}
+    <div class="toolbar">
+      <button class="btn" type="submit">💾 Saqlash</button>
+      {% if current %}
+      <button class="btn secondary" type="submit" name="clear" value="1">↩️ Standart matnga qaytarish</button>
+      {% endif %}
+    </div>
+    {% endif %}
+  </form>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Standart matn (agar siz o'zgartirmasangiz shu ko'rinadi)</h3>
+  <p style="white-space:pre-wrap; color:var(--muted)">{{ default_text }}</p>
+</div>
+{% endblock %}

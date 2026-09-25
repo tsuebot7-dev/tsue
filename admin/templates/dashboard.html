@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Statistika — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>📊 Statistika</h1>
+</div>
+
+<div class="grid">
+  <div class="stat-card">
+    <h3>Jami foydalanuvchilar</h3>
+    <div class="count">{{ stats.total_users }}</div>
+    <div class="meta">{{ stats.blocked_users }} tasi bloklangan</div>
+  </div>
+  <div class="stat-card">
+    <h3>Bugun faol bo'lgan</h3>
+    <div class="count">{{ stats.active_today }}</div>
+    <div class="meta">so'nggi 24 soatda</div>
+  </div>
+  <div class="stat-card">
+    <h3>Yangi foydalanuvchilar</h3>
+    <div class="count">{{ stats.new_today }}</div>
+    <div class="meta">bugun &middot; {{ stats.new_week }} ta so'nggi 7 kunda</div>
+  </div>
+  <div class="stat-card">
+    <h3>Jami so'rovlar</h3>
+    <div class="count">{{ stats.total_events }}</div>
+    <div class="meta">{{ stats.events_today }} tasi bugun</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Eng ko'p ishlatilgan bo'limlar</h3>
+  {% if stats.top_events %}
+  <table>
+    <thead><tr><th>Bo'lim</th><th>Necha marta ishlatilgan</th></tr></thead>
+    <tbody>
+      {% for row in stats.top_events %}
+      <tr>
+        <td>{{ event_labels.get(row.event_type, row.event_type) }}</td>
+        <td>{{ row.cnt }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--muted)">Hali hech qanday faollik qayd etilmagan.</p>
+  {% endif %}
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3 style="margin-top:0">🏆 Eng ko'p ko'rilgan guruhlar</h3>
+    {% if top_groups %}
+    <table>
+      <thead><tr><th>Guruh</th><th>Ko'rilgan</th></tr></thead>
+      <tbody>
+        {% for row in top_groups %}
+        <tr><td>{{ row.detail }}</td><td>{{ row.cnt }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--muted)">Hali ma'lumot yo'q.</p>
+    {% endif %}
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">🏆 Eng ko'p ko'rilgan fakultetlar</h3>
+    {% if top_faculties %}
+    <table>
+      <thead><tr><th>Fakultet</th><th>Ko'rilgan</th></tr></thead>
+      <tbody>
+        {% for row in top_faculties %}
+        <tr><td>{{ names.get(row.detail, row.detail) }}</td><td>{{ row.cnt }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--muted)">Hali ma'lumot yo'q.</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Ma'lumot fayllari holati</h3>
+  <table>
+    <thead><tr><th>Fayl</th><th>Yozuvlar soni</th></tr></thead>
+    <tbody>
+      {% for key, s in file_stats.items() %}
+      <tr>
+        <td>{{ titles.get(key, key) }}</td>
+        <td>{{ s.count if s.exists else "fayl yo'q" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if request.state.is_super_admin or request.state.admin_permissions.get('data') %}
+  <div class="toolbar">
+    <a class="btn secondary" href="/data">📁 Ma'lumotlarni boshqarish</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

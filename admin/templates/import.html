@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Eski botdan import — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header"><h1>📥 Eski botdan ma'lumot import qilish</h1></div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Avvalgi botingizning <code>.db</code> (SQLite) faylini yuklang.
+    Tizim quyidagilarni ko'chiradi:
+  </p>
+  <ul style="color:var(--muted)">
+    <li>Foydalanuvchilarning "asosiy guruhi/xonasi/o'qituvchisi"</li>
+    <li>Saqlangan jadvallar</li>
+    <li>Guruhlarga avtomatik yuborish sozlamalari</li>
+    <li>Eski faoliyat tarixi (statistika uchun)</li>
+  </ul>
+  <p style="color:var(--muted)">
+    <b>Muhim:</b> eski havolalar (URL) endi ishlamasligi mumkin (TSUE
+    jadval ID'sini almashtirgan bo'lishi mumkin), shuning uchun har bir
+    yozuv NOMI bo'yicha hozirgi ma'lumotlardan yangi, to'g'ri havola
+    qidirib topiladi. Agar nom hozirgi faylda topilmasa, o'sha yozuv
+    o'tkazib yuboriladi va pastda ro'yxatda ko'rsatiladi.
+  </p>
+
+  {% if request.state.is_super_admin or request.state.admin_permissions.get('import_legacy') == 'edit' %}
+  <form method="post" action="/import" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".db" required>
+    <div class="toolbar">
+      <button class="btn" type="submit">📥 Import qilish</button>
+    </div>
+  </form>
+  {% else %}
+  <div class="info">🔒 Sizda faqat ko'rish huquqi bor - import qila olmaysiz.</div>
+  {% endif %}
+</div>
+
+{% if report %}
+<div class="card">
+  <h3 style="margin-top:0">✅ Import natijasi</h3>
+  <table>
+    <tbody>
+      <tr><td>Foydalanuvchilar (asosiy guruh/xona/ustoz)</td><td><b>{{ report.users_migrated }}</b> muvaffaqiyatli</td></tr>
+      <tr><td>Saqlangan jadvallar</td><td><b>{{ report.saved_migrated }}</b> muvaffaqiyatli</td></tr>
+      <tr><td>Guruh avtomatik yuborish sozlamalari</td><td><b>{{ report.groups_migrated }}</b> muvaffaqiyatli</td></tr>
+      <tr><td>Eski faoliyat tarixi</td><td><b>{{ report.logs_migrated }}</b> yozuv</td></tr>
+    </tbody>
+  </table>
+
+  {% if report.users_skipped %}
+  <h4>⚠️ Topilmagan foydalanuvchi guruhlari/xonalari ({{ report.users_skipped|length }})</h4>
+  <p style="color:var(--muted); font-size:13px">{{ report.users_skipped|join(', ') }}</p>
+  {% endif %}
+
+  {% if report.saved_skipped %}
+  <h4>⚠️ Topilmagan saqlangan jadvallar ({{ report.saved_skipped|length }})</h4>
+  <p style="color:var(--muted); font-size:13px">{{ report.saved_skipped|join(', ') }}</p>
+  {% endif %}
+
+  {% if report.groups_skipped %}
+  <h4>⚠️ Qo'lda qayta sozlash kerak bo'lgan guruhlar ({{ report.groups_skipped|length }})</h4>
+  <p style="color:var(--muted); font-size:13px">{{ report.groups_skipped|join(', ') }}</p>
+  <p style="color:var(--muted); font-size:13px">
+    Bu guruhlarda botni qayta ishga tushirish uchun, o'sha Telegram
+    guruhida <code>/start</code> buyrug'ini qayta yuborish kifoya.
+  </p>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+{% endblock %}

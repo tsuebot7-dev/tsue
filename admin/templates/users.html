@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Foydalanuvchilar — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>👥 Foydalanuvchilar</h1>
+</div>
+
+<div class="card">
+  <form method="get" action="/users" class="toolbar">
+    <input type="search" name="q" placeholder="ID, username yoki ism bo'yicha qidirish..." value="{{ search }}" style="max-width:320px">
+    <button class="btn secondary" type="submit">🔍 Qidirish</button>
+    {% if search %}<a class="btn secondary" href="/users">Tozalash</a>{% endif %}
+  </form>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">Jami: {{ total }} ta foydalanuvchi</p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Ism</th>
+        <th>Birinchi kirgan</th>
+        <th>Oxirgi faollik</th>
+        <th>Xabarlar</th>
+        <th>Holat</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.user_id }}</td>
+        <td>{{ ('@' + u.username) if u.username else '-' }}</td>
+        <td>{{ u.first_name or '' }} {{ u.last_name or '' }}</td>
+        <td>{{ u.first_seen[:16] if u.first_seen else '-' }}</td>
+        <td>{{ u.last_seen[:16] if u.last_seen else '-' }}</td>
+        <td>{{ u.message_count }}</td>
+        <td>
+          {% if u.is_blocked %}
+            <span class="badge red">Bloklangan</span>
+          {% else %}
+            <span class="badge green">Faol</span>
+          {% endif %}
+        </td>
+        <td>
+          <a class="btn secondary" href="/users/{{ u.user_id }}/chat">💬 Yozish</a>
+          {% if request.state.is_super_admin or request.state.admin_permissions.get('users') == 'edit' %}
+          <form class="inline" method="post" action="/users/{{ u.user_id }}/toggle-block">
+            <input type="hidden" name="q" value="{{ search }}">
+            <input type="hidden" name="page" value="{{ page }}">
+            {% if u.is_blocked %}
+              <button class="btn secondary" type="submit">Blokdan chiqarish</button>
+            {% else %}
+              <button class="btn danger" type="submit">Bloklash</button>
+            {% endif %}
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    {% if page > 0 %}
+      <a class="btn secondary" href="/users?page={{ page - 1 }}&q={{ search }}">⬅️ Oldingi</a>
+    {% endif %}
+    {% if has_next %}
+      <a class="btn secondary" href="/users?page={{ page + 1 }}&q={{ search }}">Keyingi ➡️</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

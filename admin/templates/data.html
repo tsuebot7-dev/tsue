@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block title %}Ma'lumotlarni yangilash — TSUE Bot Admin{% endblock %}
+{% block content %}
+{% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('data') == 'edit' %}
+<div class="page-header">
+  <h1>📁 Ma'lumotlarni yangilash</h1>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Har bir faylni ko'rish, tahrirlash yoki yangi versiyasini yuklash mumkin.
+    Saqlangach, bot avtomatik ravishda yangi ma'lumotlardan foydalana boshlaydi
+    (qayta ishga tushirishning hojati yo'q).
+  </p>
+</div>
+
+<div class="grid">
+  {% for key, path in files.items() %}
+  <div class="stat-card">
+    <h3>{{ titles.get(key, key) }}</h3>
+    {% if stats[key].exists %}
+      <div class="count">{{ stats[key].count }}</div>
+      <div class="meta">ta yozuv &middot; {{ stats[key].size_kb }} KB</div>
+    {% else %}
+      <div class="count" style="color:#b91c1c">yo'q</div>
+      <div class="meta">fayl hali yaratilmagan</div>
+    {% endif %}
+    <a class="btn" href="/file/{{ key }}">Ochish / tahrirlash</a>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">⚙️ Avtomatik skanerlash (umumiy boshqaruv)</h3>
+  <p style="color:var(--muted); margin-top:0">
+    Agar foydalanuvchilarga skrinshot yuborishda muammolar ko'p bo'lsa
+    (masalan sayt vaqtincha zo'riqib qolgan bo'lsa), fon skanerlashini
+    shu yerdan vaqtincha butunlay o'chirib qo'yishingiz mumkin. Bu
+    faqat AVTOMATIK (haftalik) skanerlashga ta'sir qiladi - qo'lda
+    "Hozir skanerlash" tugmalari baribir ishlayveradi.
+  </p>
+  <p>
+    Holat:
+    {% if scanning_enabled %}
+      <span class="badge green">✅ Yoqilgan</span>
+    {% else %}
+      <span class="badge red">⏸️ O'chirilgan</span>
+    {% endif %}
+  </p>
+  {% if can_edit %}
+  <form method="post" action="/data/toggle-scanning">
+    {% if scanning_enabled %}
+      <button class="btn danger" type="submit">⏸️ Avtomatik skanerlashni o'chirish</button>
+    {% else %}
+      <button class="btn" type="submit">▶️ Avtomatik skanerlashni yoqish</button>
+    {% endif %}
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">🎓 Guruhlar - havolalarni sinxronlash</h3>
+  <p style="color:var(--muted); margin-top:0">
+    Bu <b>guruhlar.json faylingiz strukturasini o'zgartirmaydi</b> —
+    faqat har bir mavjud guruh nomining TSUE saytidagi joriy (to'g'ri)
+    havolasini tekshirib, agar ID almashgan bo'lsa, o'sha bitta
+    qiymatni yangilaydi. Fakultet/kurs tartibi va joylashuvi
+    (siz qo'lda tuzgan) butunlay saqlanadi.
+  </p>
+  <p>
+    Holat:
+    {% if group_scan_status == 'cooldown' %}
+      <span class="badge red">⏸️ Vaqtincha to'xtatilgan ({{ group_scan_progress }}/{{ group_scan_total }} da)</span>
+    {% elif group_scan_status == 'running' and group_scan_stuck %}
+      <span class="badge red">⚠️ To'xtab qolgan ({{ group_scan_progress }}/{{ group_scan_total }} da)</span>
+    {% elif group_scan_status == 'running' %}
+      <span class="badge green">Tekshirilmoqda... ({{ group_scan_progress }}/{{ group_scan_total }})</span>
+    {% elif group_scan_status == 'done' %}
+      <span class="badge green">Tayyor</span> — oxirgi marta: {{ group_scan_finished_at_display }}
+      <br><small style="color:var(--muted)">
+        {{ group_scan_updated }} ta havola yangilandi, {{ group_scan_unchanged }} ta o'zgarishsiz qoldi
+        {% if group_scan_new_found %}, va {{ group_scan_new_found }} ta yangi guruh saytda topildi (faylga avtomatik qo'shilmadi — "Xatolar jurnali"da ro'yxati bor){% endif %}.
+      </small>
+    {% elif group_scan_status == 'paused' %}
+      <span class="badge red">⏸️ To'xtatildi ({{ group_scan_progress }}/{{ group_scan_total }} da)</span>
+      <br><small style="color:var(--muted)">"Avtomatik skanerlashni to'xtatish" tugmasi bosilgani uchun to'xtadi. "Hozir tekshirish" tugmasi bilan qayta boshlash mumkin.</small>
+    {% else %}
+      <span class="badge red">Hali tekshirilmagan</span>
+    {% endif %}
+  </p>
+  {% if can_edit %}
+  <form method="post" action="/data/sync-groups-now">
+    <button class="btn" type="submit" {% if group_scan_status == 'cooldown' or (group_scan_status == 'running' and not group_scan_stuck) %}disabled{% endif %}>
+      🔍 Guruh havolalarini hozir tekshirish
+    </button>
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">🟢 Bo'sh xonalar - avtomatik skanerlash</h3>
+  <p style="color:var(--muted); margin-top:0">
+    Bot har <b>{{ scan_interval_days }} kunda</b> barcha xonalarni
+    (tsue.edupage.org) o'zi qayta skanerlab, "Bo'sh xonalar ma'lumoti"
+    faylini avtomatik yangilab turadi. Xohlasangiz, kutmasdan hozir
+    ham ishga tushirishingiz mumkin.
+  </p>
+  <p>
+    Holat:
+    {% if scan_status == 'cooldown' %}
+      <span class="badge red">⏸️ Vaqtincha to'xtatilgan ({{ scan_progress }}/{{ scan_total }} da)</span>
+      <br><small style="color:var(--muted)">Ketma-ket ko'p xato chiqqani uchun (ehtimol sayt vaqtinchalik bloklagan), tizim avtomatik dam olib, biroz vaqtdan keyin o'zi davom ettiradi.</small>
+    {% elif scan_status == 'running' and scan_stuck %}
+      <span class="badge red">⚠️ To'xtab qolgan ({{ scan_progress }}/{{ scan_total }} da)</span>
+      <br><small style="color:var(--muted)">10 daqiqadan ortiq hech qanday yangilanish bo'lmadi (ehtimol server qayta ishga tushirilgan). "Hozir skanerlash" tugmasi endi qaytadan boshlaydi.</small>
+    {% elif scan_status == 'running' %}
+      <span class="badge green">Skanerlanmoqda... ({{ scan_progress }}/{{ scan_total }})</span>
+    {% elif scan_status == 'done' %}
+      <span class="badge green">Tayyor</span> — oxirgi marta: {{ scan_finished_at_display }}
+      <br><small style="color:var(--muted)">
+        xonalar.json: {{ xonalar_sync_updated }} ta havola yangilandi
+        {% if xonalar_sync_new_found %}, {{ xonalar_sync_new_found }} ta yangi xona saytda topildi (<a href="/new-items">Yangi topilganlar</a>){% endif %}.
+      </small>
+    {% elif scan_status == 'paused' %}
+      <span class="badge red">⏸️ To'xtatildi ({{ scan_progress }}/{{ scan_total }} da)</span>
+      <br><small style="color:var(--muted)">"Avtomatik skanerlashni to'xtatish" tugmasi bosilgani uchun to'xtadi. "Hozir skanerlash" tugmasi bilan qayta boshlash mumkin.</small>
+    {% else %}
+      <span class="badge red">Hali skanerlanmagan</span>
+    {% endif %}
+  </p>
+  {% if can_edit %}
+  <form method="post" action="/data/scan-now">
+    <button class="btn" type="submit" {% if scan_status == 'cooldown' or (scan_status == 'running' and not scan_stuck) %}disabled{% endif %}>
+      🔍 Xonalarni hozir skanerlash
+    </button>
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">👨‍🏫 O'qituvchilar - havolalarni sinxronlash</h3>
+  <p style="color:var(--muted); margin-top:0">
+    Bu ham <b>ustozlar.json faylingiz strukturasini o'zgartirmaydi</b> —
+    faqat mavjud ismlarning URL manzilini tekshirib, kerak bo'lsa
+    yangilaydi (har <b>{{ teacher_scan_interval_days }} kunda</b>,
+    ID 1..{{ teacher_scan_end }} oralig'ida).
+  </p>
+  <p>
+    Holat:
+    {% if teacher_scan_status == 'cooldown' %}
+      <span class="badge red">⏸️ Vaqtincha to'xtatilgan ({{ teacher_scan_progress }}/{{ teacher_scan_total }} da)</span>
+      <br><small style="color:var(--muted)">Ketma-ket ko'p xato chiqqani uchun, tizim avtomatik dam olib, biroz vaqtdan keyin o'zi davom ettiradi.</small>
+    {% elif teacher_scan_status == 'running' and teacher_scan_stuck %}
+      <span class="badge red">⚠️ To'xtab qolgan ({{ teacher_scan_progress }}/{{ teacher_scan_total }} da)</span>
+      <br><small style="color:var(--muted)">10 daqiqadan ortiq hech qanday yangilanish bo'lmadi. "Hozir tekshirish" tugmasi endi qaytadan boshlaydi.</small>
+    {% elif teacher_scan_status == 'running' %}
+      <span class="badge green">Tekshirilmoqda... ({{ teacher_scan_progress }}/{{ teacher_scan_total }}, {{ teacher_scan_found }} ta topildi)</span>
+    {% elif teacher_scan_status == 'done' %}
+      <span class="badge green">Tayyor</span> — oxirgi marta: {{ teacher_scan_finished_at_display }}
+      <br><small style="color:var(--muted)">
+        {{ teacher_scan_updated }} ta havola yangilandi
+        {% if teacher_scan_new_found %}, {{ teacher_scan_new_found }} ta yangi o'qituvchi saytda topildi (<a href="/new-items">Yangi topilganlar</a>){% endif %}.
+      </small>
+    {% elif teacher_scan_status == 'paused' %}
+      <span class="badge red">⏸️ To'xtatildi ({{ teacher_scan_progress }}/{{ teacher_scan_total }} da)</span>
+      <br><small style="color:var(--muted)">"Avtomatik skanerlashni to'xtatish" tugmasi bosilgani uchun to'xtadi. "Hozir tekshirish" tugmasi bilan qayta boshlash mumkin.</small>
+    {% else %}
+      <span class="badge red">Hali tekshirilmagan</span>
+    {% endif %}
+  </p>
+  {% if can_edit %}
+  <form method="post" action="/data/scan-teachers-now">
+    <button class="btn" type="submit" {% if teacher_scan_status == 'cooldown' or (teacher_scan_status == 'running' and not teacher_scan_stuck) %}disabled{% endif %}>
+      🔍 O'qituvchi havolalarini hozir tekshirish
+    </button>
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Boshqa amallar</h3>
+  {% if can_edit %}
+  <form class="inline" method="post" action="/reload">
+    <button class="btn secondary" type="submit">🔄 Ma'lumotlarni qayta yuklash</button>
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+{% endblock %}

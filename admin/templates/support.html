@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Texnik bo'lim — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>🛠 Texnik bo'lim</h1>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Foydalanuvchilar botga yozgan yoki bot ularga yuborgan barcha
+    yozishmalar shu yerda, eng so'nggi xabar vaqti bo'yicha
+    ko'rinadi. "Javob kutilmoqda" belgisi - so'nggi xabarni
+    foydalanuvchi yozgan, hali javob berilmagan degani.
+  </p>
+</div>
+
+<div class="grid">
+  <div class="stat-card">
+    <h3>Jami suhbatlar</h3>
+    <div class="count">{{ stats.total_threads }}</div>
+    <div class="meta">foydalanuvchi bilan yozishma</div>
+  </div>
+  <div class="stat-card">
+    <h3>Javob kutilmoqda</h3>
+    <div class="count" style="color:{{ '#b91c1c' if stats.needs_reply else 'var(--text)' }}">{{ stats.needs_reply }}</div>
+    <div class="meta">so'nggi xabarni foydalanuvchi yozgan</div>
+  </div>
+</div>
+
+<div class="card">
+  {% if threads %}
+  <table>
+    <thead><tr><th>Foydalanuvchi</th><th>So'nggi xabar</th><th>Holat</th><th>Vaqt</th><th></th></tr></thead>
+    <tbody>
+      {% for t in threads %}
+      <tr>
+        <td>{{ t.display_name }} <span style="color:var(--muted); font-size:12px">· ID: {{ t.user_id }}</span></td>
+        <td style="max-width:360px">
+          {% if t.last_msg_type == 'photo' %}🖼️ Rasm{% if t.last_text %} — {{ t.last_text[:60] }}{% endif %}
+          {% elif t.last_msg_type == 'video' %}🎬 Video{% if t.last_text %} — {{ t.last_text[:60] }}{% endif %}
+          {% elif t.last_msg_type == 'document' %}📎 Fayl{% if t.last_text %} — {{ t.last_text[:60] }}{% endif %}
+          {% else %}{{ (t.last_text or '')[:80] }}
+          {% endif %}
+        </td>
+        <td>
+          {% if t.last_direction == 'in' %}
+            <span class="badge red">Javob kutilmoqda</span>
+          {% else %}
+            <span class="badge green">Javob berilgan</span>
+          {% endif %}
+        </td>
+        <td style="white-space:nowrap; color:var(--muted)">{{ t.last_at[:16] if t.last_at else '-' }}</td>
+        <td><a class="btn secondary" href="/users/{{ t.user_id }}/chat?ctx=support">💬 Ochish</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    {% if page > 0 %}
+      <a class="btn secondary" href="/support?page={{ page - 1 }}">⬅️ Oldingi</a>
+    {% endif %}
+    {% if has_next %}
+      <a class="btn secondary" href="/support?page={{ page + 1 }}">Keyingi ➡️</a>
+    {% endif %}
+  </div>
+  {% else %}
+  <p style="color:var(--muted)">Hali hech qanday yozishma yo'q.</p>
+  {% endif %}
+</div>
+{% endblock %}

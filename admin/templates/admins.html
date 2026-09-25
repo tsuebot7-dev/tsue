@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Adminlar — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header"><h1>🔑 Adminlar</h1></div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    <b>{{ super_admin }}</b> — asosiy admin (.env / Railway Variables
+    orqali sozlangan, o'chirib bo'lmaydi, cheklovlarga bog'liq emas -
+    doim TO'LIQ huquqqa ega). Bundan tashqari, xodimlaringiz uchun
+    qo'shimcha kirish huquqlarini shu yerdan yarating - har bir bo'lim
+    uchun alohida: <b>Yo'q</b> (bo'lim umuman ko'rinmaydi),
+    <b>Faqat ko'rish</b> (ko'radi, lekin hech narsani o'zgartira
+    olmaydi) yoki <b>To'liq huquq</b> (ko'rish + barcha amallar).
+    "Adminlar" bo'limining o'zi xavfsizlik uchun hech qanday
+    qo'shimcha adminga berilmaydi.
+  </p>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  {% if request.query_params.get('added') %}<div class="success">✅ Yangi admin qo'shildi.</div>{% endif %}
+  {% if request.query_params.get('deleted') %}<div class="success">✅ Admin o'chirildi.</div>{% endif %}
+  {% if request.query_params.get('updated') %}<div class="success">✅ Huquqlar yangilandi.</div>{% endif %}
+
+  <table>
+    <thead><tr><th>Login</th><th>Qo'shilgan</th><th>Huquqlar</th><th></th></tr></thead>
+    <tbody>
+      <tr>
+        <td>{{ super_admin }} <span class="badge green">Asosiy</span></td>
+        <td>-</td>
+        <td><span class="perm-none">Barcha bo'limlarga to'liq huquq</span></td>
+        <td></td>
+      </tr>
+      {% for a in admins %}
+      <tr>
+        <td>{{ a.username }}</td>
+        <td>{{ a.created_at[:16] if a.created_at else '-' }}</td>
+        <td>
+          <div class="perm-summary">
+            {% set granted = a.permissions or {} %}
+            {% if granted %}
+              {% for key, level in granted.items() %}
+                <span class="perm-chip {{ 'edit' if level == level_edit else '' }}">{{ sections.get(key, key) }} · {{ level_labels.get(level, level) }}</span>
+              {% endfor %}
+            {% else %}
+              <span class="perm-none">Hech qanday huquq berilmagan</span>
+            {% endif %}
+          </div>
+        </td>
+        <td style="white-space:nowrap">
+          <details>
+            <summary class="btn secondary" style="display:inline-flex; cursor:pointer;">✏️ Tahrirlash</summary>
+            <form method="post" action="/admins/{{ a.username }}/permissions" style="margin-top:12px">
+              <div class="perm-grid">
+                {% for key, label in sections.items() %}
+                <div class="perm-label">{{ label }}</div>
+                <select name="perm_{{ key }}">
+                  <option value="{{ level_none }}" {{ 'selected' if granted.get(key, level_none) == level_none else '' }}>Yo'q</option>
+                  <option value="{{ level_view }}" {{ 'selected' if granted.get(key) == level_view else '' }}>Faqat ko'rish</option>
+                  <option value="{{ level_edit }}" {{ 'selected' if granted.get(key) == level_edit else '' }}>To'liq huquq</option>
+                </select>
+                {% endfor %}
+              </div>
+              <div class="toolbar">
+                <button class="btn" type="submit">💾 Huquqlarni saqlash</button>
+              </div>
+            </form>
+            <form class="inline" method="post" action="/admins/{{ a.username }}/delete" onsubmit="return confirm('Rostdan ham ochirilsinmi?')" style="margin-top:10px">
+              <button class="btn danger" type="submit">🗑️ Adminni o'chirish</button>
+            </form>
+          </details>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">➕ Yangi admin qo'shish</h3>
+  <form method="post" action="/admins">
+    <div class="toolbar">
+      <input type="text" name="username" placeholder="Login" required style="max-width:200px">
+      <input type="text" name="password" placeholder="Parol" required style="max-width:200px">
+    </div>
+
+    <p style="color:var(--muted); font-size:13px; margin-bottom:6px">
+      Har bir bo'lim uchun huquq darajasini tanlang (standart - "Yo'q",
+      ya'ni hech narsa belgilanmasa yangi admin hech qaysi bo'limni
+      ko'rmaydi):
+    </p>
+    <div class="perm-grid">
+      {% for key, label in sections.items() %}
+      <div class="perm-label">{{ label }}</div>
+      <select name="perm_{{ key }}">
+        <option value="{{ level_none }}" selected>Yo'q</option>
+        <option value="{{ level_view }}">Faqat ko'rish</option>
+        <option value="{{ level_edit }}">To'liq huquq</option>
+      </select>
+      {% endfor %}
+    </div>
+
+    <div class="toolbar">
+      <button class="btn" type="submit">Qo'shish</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

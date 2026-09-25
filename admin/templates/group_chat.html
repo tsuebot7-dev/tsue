@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}{{ group.chat_title }} — Yozishma — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>💬 {{ group.chat_title }}</h1>
+  <a class="btn secondary" href="/groups">⬅️ Guruhlar</a>
+</div>
+
+<div class="card chat-card">
+  <div class="chat-header">
+    <div>
+      <b>{{ group.chat_title }}</b>
+      <div class="sub">Chat ID: {{ group.chat_id }} &middot; Jadval: {{ group.name }}</div>
+    </div>
+    <div>
+      {% if group.is_active %}<span class="badge green">Faol</span>{% else %}<span class="badge red">To'xtatilgan</span>{% endif %}
+    </div>
+  </div>
+
+  <div class="chat-box" id="chat-box">
+    {% for m in messages %}
+      {% set side = 'in' if m.direction == 'in' else 'out' %}
+      <div class="bubble {{ side }}">
+        {% if m.direction == 'in' and m.sender_name %}
+          <div class="bubble-sender">{{ m.sender_name }}</div>
+        {% endif %}
+        {% if m.msg_type == 'photo' %}
+          <img src="/media/{{ m.file_id }}" alt="rasm" class="bubble-media">
+          {% if m.text %}<div class="bubble-caption">{{ m.text }}</div>{% endif %}
+        {% elif m.msg_type == 'video' %}
+          <video src="/media/{{ m.file_id }}" controls class="bubble-media"></video>
+          {% if m.text %}<div class="bubble-caption">{{ m.text }}</div>{% endif %}
+        {% elif m.msg_type == 'document' %}
+          <a class="bubble-file" href="/media/{{ m.file_id }}" target="_blank">📎 {{ m.text or 'Faylni ochish' }}</a>
+        {% else %}
+          {{ m.text }}
+        {% endif %}
+        <div class="time">{{ m.created_at[11:16] if m.created_at else '' }}</div>
+      </div>
+    {% else %}
+      <div class="chat-empty">
+        Hali yozishmalar yo'q. (Agar guruh a'zolari yozgan bo'lsa-yu bu
+        yerda ko'rinmasa, botning @BotFather'dagi "Group Privacy"
+        sozlamasi yoqilgan bo'lishi mumkin - yuqoridagi eslatmaga qarang.)
+      </div>
+    {% endfor %}
+  </div>
+
+  {% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('groups') == 'edit' %}
+  {% if can_edit %}
+  <form method="post" action="/groups/{{ group.chat_id }}/chat/send" enctype="multipart/form-data" class="chat-form-wrap">
+    <details class="attach-details">
+      <summary>📎 Rasm / video / fayl biriktirish</summary>
+      <div class="toolbar">
+        <label style="font-size:13px; color:var(--muted)">🖼️ Rasm:</label>
+        <input type="file" name="photo" accept="image/*">
+      </div>
+      <div class="toolbar">
+        <label style="font-size:13px; color:var(--muted)">🎬 Video:</label>
+        <input type="file" name="video" accept="video/*">
+      </div>
+      <div class="toolbar">
+        <label style="font-size:13px; color:var(--muted)">📎 Fayl:</label>
+        <input type="file" name="document">
+      </div>
+    </details>
+    <div class="chat-form">
+      <input type="text" name="text" placeholder="Guruhga xabar yozing... (yoki yuqorida rasm/video/fayl biriktiring)" autocomplete="off">
+      <button class="btn" type="submit">➤ Yuborish</button>
+    </div>
+  </form>
+  {% else %}
+  <p style="color:var(--muted); padding:14px 20px; margin:0">🔒 Sizda bu yerga xabar yozish huquqi yo'q (faqat ko'rish).</p>
+  {% endif %}
+</div>
+
+{% if error %}<div class="error" style="margin-top:14px">{{ error }}</div>{% endif %}
+
+<script>
+  var box = document.getElementById('chat-box');
+  box.scrollTop = box.scrollHeight;
+</script>
+{% endblock %}

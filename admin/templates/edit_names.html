@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Sarlavha nomlari — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>🏷️ Sarlavha nomlari</h1>
+</div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Botda fakultet/bino nomlari xom kalit o'rniga shu yerda ko'rsatilgan
+    chiroyli nomda chiqadi. Format: {"XOM_KALIT": "Chiroyli nom"}.
+  </p>
+
+  {% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('titles') == 'edit' %}
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  {% if request.query_params.get('saved') %}<div class="success">✅ Saqlandi.</div>{% endif %}
+  {% if not can_edit %}<div class="info">🔒 Sizda faqat ko'rish huquqi bor.</div>{% endif %}
+
+  <form method="post" action="/names">
+    <textarea class="code" name="content" spellcheck="false" {% if not can_edit %}readonly{% endif %}>{{ content }}</textarea>
+    {% if can_edit %}
+    <div class="toolbar">
+      <button class="btn" type="submit">💾 Saqlash</button>
+    </div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

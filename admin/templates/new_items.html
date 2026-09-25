@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Yangi topilganlar — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header"><h1>🆕 Yangi topilganlar</h1></div>
+
+<div class="card">
+  <p style="color:var(--muted); margin-top:0">
+    Avtomatik skanerlash paytida TSUE saytida topilgan, lekin sizning
+    <code>guruhlar.json</code> / <code>ustozlar.json</code> /
+    <code>xonalar.json</code> fayllaringizda hali yo'q bo'lgan yangi
+    guruh/o'qituvchi/xonalar shu yerda ko'rinadi. Ular faylga
+    <b>avtomatik qo'shilmaydi</b> — havolasini bosib tekshiring, kerak
+    bo'lsa fayl tahrirlash sahifasidan qo'lda qo'shing.
+  </p>
+</div>
+
+{% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('new_items') == 'edit' %}
+{% for type_key, type_label, icon in [('guruh', 'Guruhlar', '🎓'), ('ustoz', "O'qituvchilar", '👨‍🏫'), ('xona', 'Xonalar', '🚪')] %}
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <h3 style="margin:0">{{ icon }} {{ type_label }} ({{ items_by_type[type_key]|length }})</h3>
+    {% if items_by_type[type_key] and can_edit %}
+    <form method="post" action="/new-items/clear/{{ type_key }}" onsubmit="return confirm('Royxatni tozalash?')">
+      <button class="btn secondary" type="submit">🗑️ Ro'yxatni tozalash</button>
+    </form>
+    {% endif %}
+  </div>
+  {% if items_by_type[type_key] %}
+  <table>
+    <thead><tr><th>Nomi</th><th>Havola</th><th>Topilgan vaqt</th><th></th></tr></thead>
+    <tbody>
+      {% for item in items_by_type[type_key] %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td><a href="{{ item.url }}" target="_blank" style="font-size:12px">{{ item.url }}</a></td>
+        <td style="white-space:nowrap">{{ item.discovered_at[:16] }}</td>
+        <td>
+          {% if can_edit %}
+          <form class="inline" method="post" action="/new-items/{{ item.id }}/dismiss">
+            <button class="btn secondary" type="submit">O'chirish</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--muted)">Hozircha yangi {{ type_label|lower }} topilmagan.</p>
+  {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
