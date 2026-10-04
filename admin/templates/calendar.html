@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Kalendar — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header"><h1>📅 Kalendar va dars eslatmalari</h1></div>
+
+{% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('calendar') == 'edit' %}
+{% if request.query_params.get('saved') %}<div class="success">✅ Bot soati o'rnatildi.</div>{% endif %}
+{% if request.query_params.get('reset') %}<div class="success">✅ Bot soati haqiqiy vaqtga qaytarildi.</div>{% endif %}
+{% if request.query_params.get('refresh') %}<div class="success">⏳ Jadvallar fonda qayta yuklanmoqda. Bir necha daqiqadan keyin sahifani yangilang.</div>{% endif %}
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+{% if not can_edit %}<div class="info">🔒 Sizda faqat ko'rish huquqi bor.</div>{% endif %}
+
+<div class="card">
+  <h3 style="margin-top:0">🕒 Bot soati</h3>
+  <p>Haqiqiy vaqt (Toshkent): <b>{{ real_now }}</b></p>
+  <p>Bot hisoblayotgan vaqt: <b>{{ bot_now }}</b> — {{ weekday }}, <b>{{ week_letter }}</b> hafta
+    {% if offset_active %}<span class="perm-chip">sinov soati yoqilgan</span>{% endif %}
+  </p>
+  <p style="color:var(--muted)">
+    Bu yerda belgilagan vaqtingizdan boshlab bot soati odatdagidek yuradi.
+    Eslatmalar shu soat bo'yicha, foydalanuvchilar saqlab qo'ygan jadvallardan yuboriladi.
+    Masalan, <code>2026-10-05 14:15</code> deb belgilasangiz, 5 daqiqadan keyin
+    14:30 da darsi bor guruhlarga eslatma ketadi.
+    <b>Diqqat:</b> eslatmalar haqiqiy foydalanuvchilarga yuboriladi.
+  </p>
+
+  {% if can_edit %}
+  <form method="post" action="/calendar">
+    <div class="toolbar">
+      <input type="datetime-local" name="target" value="{{ bot_now_input }}" required>
+      <button class="btn" type="submit">💾 Bot soatini o'rnatish</button>
+    </div>
+  </form>
+  {% if offset_active %}
+  <form method="post" action="/calendar/reset">
+    <div class="toolbar">
+      <button class="btn secondary" type="submit">↩️ Haqiqiy vaqtga qaytarish</button>
+    </div>
+  </form>
+  {% endif %}
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">📚 Saqlangan jadvallar</h3>
+  <p>Eslatma oluvchilar: <b>{{ target_count }}</b> ta (foydalanuvchi va guruh chatlari).
+     Matn ko'rinishida saqlangan jadvallar: <b>{{ snapshot_count }}</b> ta.</p>
+  <p style="color:var(--muted)">
+    Foydalanuvchi jadvalni saqlaganda u matn ko'rinishida bazaga yoziladi va eslatmalar
+    shundan olinadi. TSUE jadvalni o'zgartirsa, quyidagi tugma barcha saqlangan
+    jadvallarni saytdan qaytadan yuklaydi.
+  </p>
+  {% if can_edit %}
+  <form method="post" action="/calendar/refresh">
+    <div class="toolbar">
+      <button class="btn secondary" type="submit">🔄 Barcha jadvallarni qayta yuklash</button>
+    </div>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

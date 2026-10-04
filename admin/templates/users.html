@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Foydalanuvchilar — TSUE Bot Admin{% endblock %}
+{% block content %}
+{% set av_colors = ['#2563eb', '#8b5cf6', '#10b981', '#f97316', '#ec4899', '#14b8a6'] %}
+<div class="page-header">
+  <div class="page-title"><h1>👥 Foydalanuvchilar</h1>
+  <p class="page-sub">Botdan foydalangan barcha foydalanuvchilar. Jami: <b>{{ total }}</b> ta{% if search %} · «{{ search }}» bo'yicha natijalar{% endif %}</p></div>
+  <div class="page-actions">
+    <form method="get" action="/users" class="search-inline">
+      <svg class="i"><use href="#i-search"/></svg>
+      <input type="search" name="q" placeholder="ID, username yoki ism…" value="{{ search }}">
+      {% if search %}<a class="btn secondary" href="/users">Tozalash</a>{% endif %}
+    </form>
+  </div>
+</div>
+
+<div class="card flush">
+  {% if users %}
+  <table>
+    <thead>
+      <tr>
+        <th>Foydalanuvchi</th>
+        <th>ID</th>
+        <th>Birinchi kirgan</th>
+        <th>Oxirgi faollik</th>
+        <th>Xabarlar</th>
+        <th>Holat</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      {% set full = ((u.first_name or '') ~ ' ' ~ (u.last_name or ''))|trim %}
+      <tr>
+        <td>
+          <div class="user-cell">
+            <span class="avatar-sm" style="background:{{ av_colors[u.user_id % 6] }}">{{ (full or u.username or '?')[:1]|upper }}</span>
+            <div><b>{{ full or '—' }}</b><small>{{ ('@' + u.username) if u.username else "username yo'q" }}</small></div>
+          </div>
+        </td>
+        <td class="muted mono">{{ u.user_id }}</td>
+        <td class="muted">{{ (u.first_seen|string)[:16]|replace('T', ' ') if u.first_seen else '—' }}</td>
+        <td>{{ (u.last_seen|string)[:16]|replace('T', ' ') if u.last_seen else '—' }}</td>
+        <td><span class="num-pill">{{ u.message_count }}</span></td>
+        <td>
+          {% if u.is_blocked %}
+            <span class="badge red">Bloklangan</span>
+          {% else %}
+            <span class="badge green">Faol</span>
+          {% endif %}
+        </td>
+        <td class="actions">
+          <a class="btn secondary sm" href="/users/{{ u.user_id }}/chat"><svg class="i"><use href="#i-message"/></svg> Yozish</a>
+          {% if request.state.is_super_admin or request.state.admin_permissions.get('users') == 'edit' %}
+          <form class="inline" method="post" action="/users/{{ u.user_id }}/toggle-block">
+            <input type="hidden" name="q" value="{{ search }}">
+            <input type="hidden" name="page" value="{{ page }}">
+            {% if u.is_blocked %}
+              <button class="btn secondary sm" type="submit">Blokdan chiqarish</button>
+            {% else %}
+              <button class="btn danger sm" type="submit">Bloklash</button>
+            {% endif %}
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state"><svg class="i"><use href="#i-users"/></svg><b>Hech kim topilmadi</b><span>Qidiruv so'zini o'zgartirib ko'ring.</span></div>
+  {% endif %}
+
+  {% if page > 0 or has_next %}
+  <div class="pagination">
+    <span class="muted">{{ page * 20 + 1 }}–{{ page * 20 + (users|length) }} / {{ total }}</span>
+    <div class="spacer"></div>
+    {% if page > 0 %}
+      <a class="btn secondary sm" href="/users?page={{ page - 1 }}&q={{ search }}">‹ Oldingi</a>
+    {% endif %}
+    {% if has_next %}
+      <a class="btn secondary sm" href="/users?page={{ page + 1 }}&q={{ search }}">Keyingi ›</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

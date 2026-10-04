@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}TSUE Bot Admin{% endblock %}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235b5bf6%22 stroke-width=%222.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M8 2v4M16 2v4%22/><rect width=%2218%22 height=%2218%22 x=%223%22 y=%224%22 rx=%224%22/><path d=%22M3 10h18M9 16l2 2 4-4%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  // Mavzu va yon panel holatini sahifa chizilishidan OLDIN o'rnatamiz -
+  // shunda sahifa ochilganda "miltillash" bo'lmaydi.
+  (function () {
+    try {
+      var theme = localStorage.getItem('tsue_admin_theme');
+      if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme);
+      if (localStorage.getItem('tsue_admin_sidebar') === 'collapsed') document.documentElement.setAttribute('data-sidebar', 'collapsed');
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* =========================================================
+     Dizayn tokenlari
+     ========================================================= */
+  :root {
+    --primary: #2563eb;
+    --primary-strong: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eef4ff;
+    --primary-rgb: 37, 99, 235;
+    --accent: #6366f1;
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --surface-2: #f7f9fc;
+    --border: #e8ecf3;
+    --border-strong: #d8dee9;
+    --text: #111827;
+    --muted: #6b7280;
+    --sidebar-bg: #ffffff;
+    --sidebar-bg-2: #ffffff;
+    --sidebar-text: #4b5563;
+    --sidebar-active: #eef4ff;
+    --header-bg: rgba(255, 255, 255, 0.86);
+    --success-bg: #ecfdf5;
+    --success-text: #047857;
+    --success-border: #a7f3d0;
+    --danger-bg: #fef2f2;
+    --danger-text: #b91c1c;
+    --danger-border: #fecaca;
+    --info-bg: #eff4ff;
+    --info-text: #1e40af;
+    --info-border: #c7d7fe;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.04);
+    --shadow-md: 0 6px 16px -4px rgba(16, 24, 40, 0.08), 0 2px 4px -2px rgba(16, 24, 40, 0.05);
+    --shadow-lg: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
+    --ring: 0 0 0 4px rgba(var(--primary-rgb), 0.16);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --sidebar-w: 264px;
+    --font: "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --primary: #60a5fa;
+      --primary-strong: #3b82f6;
+      --primary-dark: #93c5fd;
+      --primary-light: rgba(96, 165, 250, 0.12);
+      --primary-rgb: 96, 165, 250;
+      --accent: #818cf8;
+      --bg: #08090e;
+      --card: #10121a;
+      --surface-2: #151824;
+      --border: #212536;
+      --border-strong: #2c3147;
+      --text: #e9ebf5;
+      --muted: #8e95ae;
+      --sidebar-bg: #0b0c13;
+      --sidebar-bg-2: #0d0f18;
+      --sidebar-text: #969db6;
+      --sidebar-active: rgba(96, 165, 250, 0.12);
+      --header-bg: rgba(8, 9, 14, 0.7);
+      --success-bg: rgba(16, 185, 129, 0.1);
+      --success-text: #34d399;
+      --success-border: rgba(52, 211, 153, 0.25);
+      --danger-bg: rgba(239, 68, 68, 0.1);
+      --danger-text: #f87171;
+      --danger-border: rgba(248, 113, 113, 0.25);
+      --info-bg: rgba(96, 165, 250, 0.1);
+      --info-text: #93c5fd;
+      --info-border: rgba(147, 197, 253, 0.22);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 20px -6px rgba(0, 0, 0, 0.55);
+      --shadow-lg: 0 28px 56px -12px rgba(0, 0, 0, 0.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --primary: #60a5fa;
+    --primary-strong: #3b82f6;
+    --primary-dark: #93c5fd;
+    --primary-light: rgba(96, 165, 250, 0.12);
+    --primary-rgb: 96, 165, 250;
+    --accent: #818cf8;
+    --bg: #08090e;
+    --card: #10121a;
+    --surface-2: #151824;
+    --border: #212536;
+    --border-strong: #2c3147;
+    --text: #e9ebf5;
+    --muted: #8e95ae;
+    --sidebar-bg: #0b0c13;
+    --sidebar-bg-2: #0d0f18;
+    --sidebar-text: #969db6;
+    --sidebar-active: rgba(96, 165, 250, 0.12);
+    --header-bg: rgba(8, 9, 14, 0.7);
+    --success-bg: rgba(16, 185, 129, 0.1);
+    --success-text: #34d399;
+    --success-border: rgba(52, 211, 153, 0.25);
+    --danger-bg: rgba(239, 68, 68, 0.1);
+    --danger-text: #f87171;
+    --danger-border: rgba(248, 113, 113, 0.25);
+    --info-bg: rgba(96, 165, 250, 0.1);
+    --info-text: #93c5fd;
+    --info-border: rgba(147, 197, 253, 0.22);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 20px -6px rgba(0, 0, 0, 0.55);
+    --shadow-lg: 0 28px 56px -12px rgba(0, 0, 0, 0.7);
+  }
+
+  /* =========================================================
+     Asos
+     ========================================================= */
+  * { box-sizing: border-box; }
+  html { color-scheme: light dark; }
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
+  body {
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.55;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  h1, h2, h3, h4 { font-weight: 650; letter-spacing: -0.02em; line-height: 1.25; }
+  h3 { font-size: 15.5px; }
+  code {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 0.86em;
+  }
+  ul { color: var(--muted); padding-left: 20px; margin: 10px 0; }
+  ul li { margin-bottom: 4px; }
+  ::selection { background: rgba(var(--primary-rgb), 0.22); }
+  :focus-visible { outline: none; box-shadow: var(--ring); border-radius: 8px; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.28); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background-color: rgba(128,128,128,0.5); }
+
+  .i { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Yuqoridagi yuklanish chizig'i (sahifa almashganda) */
+  .nav-progress {
+    position: fixed; top: 0; left: 0; height: 2.5px; width: 0; z-index: 100;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    box-shadow: 0 0 12px rgba(var(--primary-rgb), 0.7);
+    opacity: 0;
+    transition: width 0.4s var(--ease), opacity 0.3s ease;
+  }
+  .nav-progress.run { opacity: 1; width: 82%; transition: width 6s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.2s ease; }
+
+  /* =========================================================
+     Yon panel
+     ========================================================= */
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: linear-gradient(180deg, var(--sidebar-bg), var(--sidebar-bg-2));
+    border-right: 1px solid var(--border);
+    color: var(--sidebar-text);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 40;
+    transition: width 0.32s var(--ease), transform 0.32s var(--ease);
+    view-transition-name: sidebar;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    padding: 20px 20px 18px;
+    text-decoration: none; color: var(--text);
+    white-space: nowrap;
+  }
+  .logo {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 11px;
+    display: grid; place-items: center;
+    color: #fff;
+    background: linear-gradient(135deg, #3b82f6, #2563eb 55%, #6366f1);
+    box-shadow: 0 6px 18px -4px rgba(37, 99, 235, 0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+    position: relative; overflow: hidden;
+  }
+  .logo::after {
+    content: ""; position: absolute; inset: -40%;
+    background: conic-gradient(from 0deg, transparent 0 70%, rgba(255,255,255,0.45) 80%, transparent 90%);
+    animation: logo-sheen 4.5s linear infinite;
+  }
+  .logo .i { width: 19px; height: 19px; stroke-width: 2.1; position: relative; z-index: 1; }
+  @keyframes logo-sheen { to { transform: rotate(360deg); } }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.15; overflow: hidden; }
+  .brand-text b { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand-text small { font-size: 11.5px; color: var(--muted); font-weight: 500; }
+
+  .sidebar nav {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 6px 12px 12px;
+    position: relative;
+  }
+  .nav-indicator {
+    position: absolute; left: 12px; right: 12px; top: 0; height: 40px;
+    border-radius: 11px;
+    background: var(--sidebar-active);
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: top 0.45s var(--ease-spring), height 0.3s var(--ease), opacity 0.2s ease;
+  }
+  .nav-indicator::before { content: none; }
+  .sidebar nav a {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 12px;
+    height: 40px;
+    padding: 0 12px;
+    margin-bottom: 2px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 13.5px; font-weight: 500;
+    border-radius: 11px;
+    white-space: nowrap;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  .sidebar nav a .i { transition: transform 0.35s var(--ease-spring), color 0.2s ease; }
+  .sidebar nav a:hover { color: var(--text); background: rgba(var(--primary-rgb), 0.06); }
+  .sidebar nav a:hover .i { transform: scale(1.12) rotate(-4deg); }
+  .sidebar nav a.active { color: var(--primary); font-weight: 650; background: transparent; }
+  .sidebar nav a.active .i { color: var(--primary); }
+  .section-label {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 650;
+    color: var(--muted); opacity: 0.75;
+    padding: 18px 12px 8px;
+    white-space: nowrap;
+  }
+  .sidebar-footer { padding: 12px; border-top: 1px solid var(--border); }
+  .collapse-btn {
+    display: flex; align-items: center; gap: 12px; width: 100%; height: 38px; padding: 0 12px;
+    background: transparent; border: none; border-radius: 10px; cursor: pointer;
+    color: var(--muted); font: inherit; font-size: 13px; font-weight: 500; white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .collapse-btn:hover { background: rgba(var(--primary-rgb), 0.07); color: var(--text); }
+  .collapse-btn .i { transition: transform 0.35s var(--ease); }
+
+  /* Yig'ilgan (faqat ikonka) holat */
+  :root[data-sidebar="collapsed"] .sidebar { width: 76px; }
+  :root[data-sidebar="collapsed"] .brand-text,
+  :root[data-sidebar="collapsed"] .sidebar .label,
+  :root[data-sidebar="collapsed"] .section-label { opacity: 0; pointer-events: none; }
+  :root[data-sidebar="collapsed"] .section-label { height: 14px; padding: 0; margin: 8px 0; border-top: 1px solid var(--border); }
+  :root[data-sidebar="collapsed"] .collapse-btn .i { transform: rotate(180deg); }
+  .brand-text, .sidebar .label, .section-label { transition: opacity 0.2s ease; }
+  .tip {
+    position: fixed; z-index: 90; pointer-events: none;
+    background: var(--text); color: var(--bg);
+    font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    opacity: 0; transform: translateX(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .tip.show { opacity: 1; transform: none; }
+
+  .backdrop {
+    position: fixed; inset: 0; z-index: 39;
+    background: rgba(5, 6, 12, 0.45);
+    backdrop-filter: blur(3px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  /* =========================================================
+     Yuqori panel (header)
+     ========================================================= */
+  .shell { flex: 1; min-width: 0; display: flex; flex-direction: column; position: relative; isolation: isolate; }
+  .shell::before {
+    display: none;
+    /* Yumshoq "aurora" fon - faqat sahifa tepasida */
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 420px; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(600px 240px at 12% -40px, rgba(var(--primary-rgb), 0.13), transparent 70%),
+      radial-gradient(520px 220px at 88% -60px, rgba(168, 85, 247, 0.11), transparent 70%);
+    animation: aurora 14s ease-in-out infinite alternate;
+  }
+  @keyframes aurora {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(-30px, 10px, 0) scale(1.06); }
+  }
+  .header {
+    position: sticky; top: 0; z-index: 30;
+    display: flex; align-items: center; gap: 14px;
+    height: 70px; padding: 0 32px;
+    background: var(--header-bg);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+    view-transition-name: header;
+  }
+  .header { border-bottom-color: var(--border); }
+  .crumbs { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); min-width: 0; }
+  .crumbs b { color: var(--text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .crumbs .sep { opacity: 0.5; }
+  .header .spacer { flex: 1; }
+  .icon-btn {
+    width: 38px; height: 38px; display: grid; place-items: center;
+    border-radius: 10px; border: 1px solid var(--border);
+    background: var(--card); color: var(--muted); cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+  }
+  .icon-btn:hover { color: var(--text); border-color: var(--border-strong); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .icon-btn:active { transform: scale(0.94); }
+  .menu-btn { display: none; }
+  .theme-btn .i { grid-area: 1 / 1; transition: transform 0.5s var(--ease-spring), opacity 0.3s ease; }
+  .theme-btn .sun { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  .theme-btn .moon { opacity: 1; transform: none; }
+  :root.is-dark .theme-btn .sun { opacity: 1; transform: none; }
+  :root.is-dark .theme-btn .moon { opacity: 0; transform: rotate(90deg) scale(0.4); }
+
+  .top-search {
+    flex: 0 1 560px; min-width: 0; position: relative; display: flex; align-items: center;
+  }
+  .top-search .i { position: absolute; left: 13px; color: var(--muted); width: 17px; height: 17px; pointer-events: none; }
+  .top-search input[type=search] {
+    height: 42px; padding: 0 70px 0 40px; border-radius: 12px;
+    background: var(--surface-2); border: 1px solid var(--border); box-shadow: none; font-size: 13.5px;
+  }
+  .top-search input[type=search]:focus { background: var(--card); }
+  .top-search kbd { position: absolute; right: 10px; cursor: pointer; }
+  .bell { position: relative; }
+  .bell .badge-n {
+    position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 5px;
+    border-radius: 999px; background: #ef4444; color: #fff; font-size: 10.5px; font-weight: 700;
+    display: grid; place-items: center; box-shadow: 0 0 0 2px var(--card);
+    animation: pop 0.5s var(--ease-spring) both;
+  }
+  .bell-menu {
+    position: absolute; right: 0; top: 48px; width: 300px; z-index: 50;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-lg);
+    padding: 8px; opacity: 0; transform: translateY(-6px) scale(0.98); pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.25s var(--ease-spring);
+  }
+  .bell-menu.open { opacity: 1; transform: none; pointer-events: auto; }
+  .bell-menu b { display: block; padding: 6px 8px 8px; font-size: 13px; }
+  .bell-menu a { display: flex; gap: 10px; align-items: center; padding: 9px 8px; border-radius: 9px; color: var(--text); text-decoration: none; font-size: 13px; }
+  .bell-menu a:hover { background: var(--surface-2); }
+  .bell-menu .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .bell-menu .none { padding: 10px 8px; color: var(--muted); font-size: 13px; }
+  .theme-pill {
+    display: inline-flex; align-items: center; gap: 2px; padding: 3px; height: 38px;
+    border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer;
+  }
+  .theme-pill span { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); transition: all 0.3s var(--ease-spring); }
+  .theme-pill .i { width: 16px; height: 16px; }
+  :root:not(.is-dark) .theme-pill .t-sun, :root.is-dark .theme-pill .t-moon { background: var(--card); color: #f59e0b; box-shadow: var(--shadow-sm); }
+  :root.is-dark .theme-pill .t-moon { color: #93c5fd; }
+  .date-box { display: flex; flex-direction: column; line-height: 1.2; text-align: right; white-space: nowrap; }
+  .date-box b { font-size: 13.5px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .date-box small { font-size: 12px; color: var(--muted); }
+  .me { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+  .me .i { width: 15px; height: 15px; }
+  .search-btn {
+    display: flex; align-items: center; gap: 10px;
+    height: 38px; padding: 0 8px 0 12px; min-width: 230px;
+    border-radius: 10px; border: 1px solid var(--border);
+    background: var(--card); color: var(--muted); cursor: pointer;
+    font: inherit; font-size: 13px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .search-btn:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .search-btn span { flex: 1; text-align: left; }
+  kbd {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    padding: 2px 6px; border-radius: 6px;
+    background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
+  }
+  .clock {
+    display: flex; align-items: center; gap: 8px;
+    height: 38px; padding: 0 12px; border-radius: 10px;
+    background: var(--card); border: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12.5px; color: var(--text);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .clock .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #10b981;
+    animation: pulse 2s infinite;
+  }
+  .clock small { color: var(--muted); font-family: var(--font); font-size: 12px; }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+    70% { box-shadow: 0 0 0 7px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; letter-spacing: 0.02em; font-size: 13px !important;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 14px; color: #fff; text-transform: uppercase;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: none;
+  }
+
+  /* =========================================================
+     Asosiy kontent
+     ========================================================= */
+  main {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 32px 72px;
+    view-transition-name: main;
+  }
+  .page-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+  .page-header h1 {
+    font-size: 26px; font-weight: 700; letter-spacing: -0.03em;
+    margin: 0; display: flex; align-items: center; gap: 14px;
+  }
+  .h-emoji {
+    width: 44px; height: 44px; flex-shrink: 0;
+    display: grid; place-items: center;
+    font-size: 21px; border-radius: 13px;
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.16), rgba(168, 85, 247, 0.12));
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-rgb), 0.18);
+    animation: pop 0.6s var(--ease-spring) both;
+  }
+  @keyframes pop { from { transform: scale(0.6) rotate(-12deg); opacity: 0; } }
+
+  /* Sahifa sarlavhasi: ikonka + nom + izoh, o'ngda amallar */
+  .page-header { align-items: flex-start; }
+  .page-title { min-width: 0; flex: 1; }
+  .page-title h1 { margin: 0; }
+  .page-sub { margin: 8px 0 0 58px; color: var(--muted); font-size: 14px; max-width: 820px; line-height: 1.6; }
+  .page-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .h-icon {
+    width: 44px; height: 44px; flex-shrink: 0; display: grid; place-items: center;
+    border-radius: 13px; color: var(--primary);
+    background: var(--primary-light); box-shadow: inset 0 0 0 1px rgba(var(--primary-rgb), 0.14);
+    animation: pop 0.6s var(--ease-spring) both;
+  }
+  .h-icon .i { width: 22px; height: 22px; }
+
+  /* Ichki yordamchi komponentlar */
+  .muted { color: var(--muted); }
+  .mono { font-family: var(--mono); font-size: 12.5px; }
+  .card.flush { padding: 0; overflow: hidden; }
+  .card.flush table th:first-child, .card.flush table td:first-child { padding-left: 22px; }
+  .card.flush table th:last-child, .card.flush table td:last-child { padding-right: 22px; }
+  .card.flush table thead tr th { border-radius: 0 !important; }
+  .card.flush .pagination { padding: 14px 22px; margin: 0; border-top: 1px solid var(--border); align-items: center; }
+  .pagination .spacer { flex: 1; }
+  .user-cell { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .user-cell b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+  .user-cell small { display: block; color: var(--muted); font-size: 12px; }
+  .avatar-sm {
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 13px;
+  }
+  .num-pill { display: inline-block; min-width: 30px; text-align: center; padding: 2px 9px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); font-size: 12px; font-weight: 600; }
+  td.actions { white-space: nowrap; text-align: right; }
+  .btn.sm { height: 32px; padding: 0 12px; font-size: 12.5px; border-radius: 9px; }
+  .btn.sm .i { width: 15px; height: 15px; }
+  .search-inline { position: relative; display: flex; gap: 8px; align-items: center; }
+  .search-inline .i { position: absolute; left: 12px; width: 16px; height: 16px; color: var(--muted); pointer-events: none; }
+  .search-inline input[type=search] { width: 280px; height: 40px; padding-left: 36px; }
+  .empty-state { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 44px 20px; color: var(--muted); text-align: center; }
+  .empty-state .i { width: 40px; height: 40px; padding: 9px; border-radius: 14px; background: var(--surface-2); color: var(--muted); margin-bottom: 6px; }
+  .empty-state b { color: var(--text); font-size: 15px; }
+
+  /* Kartalar */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+  .card > h3:first-child, .card > h2:first-child { margin-top: 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; margin-bottom: 20px; }
+  .grid > .card { margin-bottom: 0; }
+
+  .stat-card {
+    --mx: 50%; --my: 0%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .stat-card::before {
+    /* Sichqoncha ortidan yuradigan yorug'lik */
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: radial-gradient(320px circle at var(--mx) var(--my), rgba(var(--primary-rgb), 0.12), transparent 60%);
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  .stat-card::after {
+    content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; border-radius: 0 4px 4px 0;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleY(0.4); transform-origin: center; opacity: 0.8;
+    transition: transform 0.5s var(--ease);
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(var(--primary-rgb), 0.3); }
+  .stat-card:hover::before { opacity: 1; }
+  .stat-card:hover::after { transform: scaleY(1); }
+  .stat-card h3 { margin: 0 0 10px; font-size: 13px; color: var(--muted); font-weight: 550; letter-spacing: 0; display: flex; align-items: center; gap: 6px; }
+  .stat-card .count {
+    font-size: 34px; font-weight: 700; color: var(--text); letter-spacing: -0.035em; line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .meta { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+  .stat-card a.btn { margin-top: 14px; }
+
+  /* Tugmalar */
+  .btn {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    height: 38px; padding: 0 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.14), transparent), var(--primary-strong);
+    color: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 10px;
+    font: inherit; font-size: 13.5px; font-weight: 600;
+    cursor: pointer; text-decoration: none; white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.1), 0 4px 12px -6px rgba(var(--primary-rgb), 0.6), inset 0 1px 0 rgba(255,255,255,0.18);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.25s ease, opacity 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(16,24,40,0.12), 0 10px 22px -6px rgba(var(--primary-rgb), 0.6), inset 0 1px 0 rgba(255,255,255,0.18); }
+  .btn:active { transform: translateY(0) scale(0.97); }
+  .btn:disabled, .btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn.secondary {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn.secondary:hover { border-color: var(--border-strong); background: var(--surface-2); box-shadow: var(--shadow-md); }
+  .btn.danger { background: var(--danger-bg); color: var(--danger-text); border: 1px solid var(--danger-border); box-shadow: none; }
+  .btn.danger:hover { background: var(--danger-border); box-shadow: none; }
+  .ripple {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    background: currentColor; opacity: 0.25;
+    transform: scale(0); animation: ripple 0.6s var(--ease) forwards;
+  }
+  @keyframes ripple { to { transform: scale(1); opacity: 0; } }
+  .btn.is-loading { pointer-events: none; color: transparent !important; }
+  .btn.is-loading::after {
+    content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff;
+    animation: spin 0.7s linear infinite;
+  }
+  .btn.secondary.is-loading::after, .btn.danger.is-loading::after { border-color: rgba(var(--primary-rgb), 0.25); border-top-color: var(--primary); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Formalar */
+  label { color: var(--muted); font-size: 13px; font-weight: 500; }
+  textarea, input[type=text], input[type=search], input[type=password], input[type=number], input[type=datetime-local], input[type=date], input[type=time] {
+    width: 100%;
+    font-family: inherit; font-size: 14px;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 10px 13px;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  textarea:hover, input:hover, select:hover { border-color: rgba(var(--primary-rgb), 0.45); }
+  textarea:focus, input[type=text]:focus, input[type=search]:focus, input[type=password]:focus, input[type=number]:focus,
+  input[type=datetime-local]:focus, input[type=date]:focus, input[type=time]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: var(--ring);
+  }
+  .toolbar input[type=datetime-local] { width: auto; }
+  textarea.code {
+    min-height: 480px;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.65;
+    resize: vertical; tab-size: 2;
+    background: #0f172a; color: #e2e8f0; caret-color: #60a5fa;
+    border: 1px solid #1e293b; border-radius: 12px; padding: 16px 18px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  textarea.code:focus { border-color: #3b82f6; }
+  textarea.code::selection { background: rgba(96, 165, 250, 0.35); }
+  input[type=file] {
+    width: 100%; font-size: 13.5px; color: var(--muted);
+    border: 1.5px dashed var(--border-strong); border-radius: 12px;
+    padding: 12px 14px; background: var(--surface-2);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  input[type=file]:hover { border-color: var(--primary); background: rgba(var(--primary-rgb), 0.04); }
+  input[type=file]::file-selector-button {
+    background: var(--card); color: var(--text);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    padding: 7px 13px; border-radius: 8px;
+    font-family: inherit; font-size: 12.5px; font-weight: 600;
+    cursor: pointer; margin-right: 12px;
+    transition: border-color 0.15s ease;
+  }
+  input[type=file]::file-selector-button:hover { border-color: var(--primary); }
+  input[type=checkbox] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
+  select {
+    font-family: inherit; font-size: 13px;
+    background: var(--card); color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 9px;
+    padding: 7px 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  select:focus { outline: none; border-color: var(--primary); box-shadow: var(--ring); }
+
+  /* Huquqlar matritsasi (Adminlar sahifasi) */
+  .perm-grid { display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; margin: 14px 0; max-width: 480px; }
+  .perm-grid .perm-label { font-size: 13.5px; color: var(--text); align-self: center; }
+  .perm-summary { display: flex; flex-wrap: wrap; gap: 6px; max-width: 640px; }
+  .perm-chip {
+    display: inline-flex; align-items: center; font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 999px;
+    background: var(--primary-light); color: var(--primary-dark);
+    border: 1px solid rgba(var(--primary-rgb), 0.18);
+  }
+  .perm-chip.edit { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+  .perm-none { color: var(--muted); font-size: 12.5px; }
+
+  /* Ogohlantirishlar */
+  .error, .success, .info {
+    position: relative;
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 40px 12px 14px;
+    border-radius: 12px; margin-bottom: 16px;
+    font-size: 13.5px; font-weight: 500;
+    border: 1px solid;
+    animation: alert-in 0.5s var(--ease-spring) both;
+  }
+  .error::before, .success::before, .info::before {
+    content: ""; width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+    background: currentColor;
+    -webkit-mask: var(--alert-icon) center / contain no-repeat;
+    mask: var(--alert-icon) center / contain no-repeat;
+  }
+  .error { background: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-border);
+    --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='m15 9-6 6M9 9l6 6'/%3E%3C/svg%3E"); }
+  .success { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border);
+    --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E"); }
+  .info { background: var(--info-bg); color: var(--info-text); border-color: var(--info-border);
+    --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E"); }
+  .alert-close {
+    position: absolute; top: 8px; right: 8px;
+    width: 26px; height: 26px; display: grid; place-items: center;
+    border: none; background: transparent; color: inherit; opacity: 0.6;
+    border-radius: 7px; cursor: pointer; font-size: 17px; line-height: 1;
+    transition: opacity 0.15s ease, background 0.15s ease;
+  }
+  .alert-close:hover { opacity: 1; background: rgba(128,128,128,0.15); }
+  .alert-out { animation: alert-out 0.3s var(--ease) forwards; }
+  @keyframes alert-in { from { opacity: 0; transform: translateY(-8px) scale(0.98); } }
+  @keyframes alert-out { to { opacity: 0; transform: translateY(-6px) scale(0.98); } }
+
+  form.inline { display: inline; }
+  .toolbar { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; align-items: center; }
+
+  /* Jadvallar */
+  table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13.5px; }
+  table th, table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  table th {
+    color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em;
+    position: sticky; top: 0; z-index: 1;
+    background: var(--surface-2);
+  }
+  table thead tr th:first-child { border-top-left-radius: 10px; }
+  table thead tr th:last-child { border-top-right-radius: 10px; }
+  table tr:last-child td { border-bottom: none; }
+  table tbody tr { transition: background 0.15s ease; }
+  table tbody tr:hover { background: rgba(var(--primary-rgb), 0.04); }
+  table td { font-variant-numeric: tabular-nums; }
+  table td:has(> form.inline), table td:has(> .btn) { white-space: nowrap; }
+  table td > form.inline + form.inline, table td > .btn + form.inline, table td > form.inline + .btn { margin-left: 6px; }
+
+  /* Belgilar */
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px 3px 8px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 650;
+    border: 1px solid transparent;
+  }
+  .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .badge.green { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+  .badge.green::before { animation: pulse-green 2.4s infinite; }
+  .badge.red { background: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-border); }
+  @keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+    70% { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+
+  .pagination { display: flex; gap: 8px; margin-top: 18px; }
+
+  /* Chat sahifasi */
+  .chat-card { padding: 0; overflow: hidden; }
+  .chat-header {
+    background: var(--surface-2);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .chat-header .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .chat-box {
+    height: 460px; overflow-y: auto; padding: 22px;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(128,128,128,0.12) 1px, transparent 0) 0 0 / 22px 22px,
+      var(--bg);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .bubble {
+    max-width: 70%; padding: 9px 13px; font-size: 14px; box-shadow: var(--shadow-sm);
+    animation: bubble-in 0.4s var(--ease-spring) both;
+  }
+  @keyframes bubble-in { from { opacity: 0; transform: translateY(8px) scale(0.96); } }
+  .bubble .time { font-size: 10.5px; color: var(--muted); margin-top: 4px; text-align: right; font-variant-numeric: tabular-nums; }
+  .bubble.in { align-self: flex-start; background: var(--card); border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; }
+  .bubble.out {
+    align-self: flex-end; color: #fff; border-radius: 14px 14px 4px 14px;
+    background: linear-gradient(135deg, var(--primary-strong), #7c3aed);
+  }
+  .bubble.out .time { color: rgba(255,255,255,0.75); }
+  .bubble.out a, .bubble.out .bubble-sender { color: #fff; }
+  .chat-empty { color: var(--muted); text-align: center; margin-top: 40px; }
+  .bubble-media { max-width: 100%; border-radius: 9px; display: block; }
+  .bubble-caption { margin-top: 6px; }
+  .bubble-file { display: inline-flex; align-items: center; gap: 6px; color: inherit; text-decoration: none; font-weight: 600; }
+  .bubble-file:hover { text-decoration: underline; }
+  .bubble-sender { font-size: 12px; font-weight: 700; color: var(--primary); margin-bottom: 3px; }
+  .chat-form-wrap { border-top: 1px solid var(--border); background: var(--card); }
+  .attach-details { padding: 10px 20px 0; }
+  .attach-details summary { cursor: pointer; font-size: 12.5px; color: var(--muted); font-weight: 600; list-style: none; user-select: none; }
+  .attach-details summary::-webkit-details-marker { display: none; }
+  .attach-details[open] summary { color: var(--primary); margin-bottom: 6px; }
+  .attach-details .toolbar { margin-top: 8px; }
+  .chat-form { display: flex; gap: 10px; padding: 14px 20px; }
+  .chat-form input[type=text] { flex: 1; }
+
+  /* =========================================================
+     Buyruqlar oynasi (Ctrl+K)
+     ========================================================= */
+  .cmdk {
+    position: fixed; inset: 0; z-index: 80;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 12vh 16px 16px;
+    background: rgba(5, 6, 12, 0.4);
+    backdrop-filter: blur(6px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .cmdk.open { opacity: 1; pointer-events: auto; }
+  .cmdk-panel {
+    width: 100%; max-width: 560px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    transform: translateY(-10px) scale(0.97);
+    transition: transform 0.3s var(--ease-spring);
+  }
+  .cmdk.open .cmdk-panel { transform: none; }
+  .cmdk-input { display: flex; align-items: center; gap: 10px; padding: 0 16px; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .cmdk-input input {
+    border: none !important; box-shadow: none !important; background: transparent !important;
+    height: 54px; padding: 0 !important; font-size: 15px;
+  }
+  .cmdk-list { max-height: 360px; overflow-y: auto; padding: 8px; }
+  .cmdk-item {
+    display: flex; align-items: center; gap: 12px;
+    height: 44px; padding: 0 12px; border-radius: 10px;
+    color: var(--text); text-decoration: none; font-weight: 500;
+    transition: background 0.12s ease;
+  }
+  .cmdk-item .i { color: var(--muted); }
+  .cmdk-item.sel { background: rgba(var(--primary-rgb), 0.1); }
+  .cmdk-item.sel .i { color: var(--primary); }
+  .cmdk-item kbd { margin-left: auto; opacity: 0; }
+  .cmdk-item.sel kbd { opacity: 1; }
+  .cmdk-empty { padding: 26px; text-align: center; color: var(--muted); }
+  .cmdk-foot { display: flex; gap: 14px; padding: 10px 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); background: var(--surface-2); }
+
+  /* =========================================================
+     Paydo bo'lish animatsiyalari
+     ========================================================= */
+  .reveal { animation: rise 0.6s var(--ease) both; animation-delay: calc(var(--i, 0) * 55ms); }
+  .reveal-row { animation: rise-row 0.45s var(--ease) both; animation-delay: calc(120ms + var(--i, 0) * 22ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes rise-row { from { opacity: 0; transform: translateX(-6px); } }
+
+  /* Sahifalar orasida silliq o'tish (Chrome / Edge 126+) */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(main) { animation: vt-out 0.18s var(--ease) both; }
+  ::view-transition-new(main) { animation: vt-in 0.35s var(--ease) both; }
+  @keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+  @keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+  /* Mavzu almashayotganda butun sahifa bitta aylana bilan ochiladi */
+  .vt-theme .sidebar, .vt-theme .header, .vt-theme main { view-transition-name: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  /* =========================================================
+     Moslashuvchan (planshet / mobil)
+     ========================================================= */
+  @media (max-width: 1100px) {
+    .date-box small { display: none; }
+    .top-search kbd { display: none; }
+  }
+  @media (max-width: 900px) {
+    .sidebar, :root[data-sidebar="collapsed"] .sidebar {
+      position: fixed; left: 0; top: 0; height: 100vh; width: 280px;
+      transform: translateX(-104%);
+      box-shadow: var(--shadow-lg);
+    }
+    :root[data-sidebar="collapsed"] .brand-text,
+    :root[data-sidebar="collapsed"] .sidebar .label,
+    :root[data-sidebar="collapsed"] .section-label { opacity: 1; pointer-events: auto; }
+    :root[data-sidebar="collapsed"] .section-label { height: auto; padding: 18px 12px 8px; margin: 0; border: 0; }
+    .sidebar.open { transform: translateX(0) !important; }
+    .backdrop.open { opacity: 1; pointer-events: auto; }
+    .sidebar-footer { display: none; }
+    .menu-btn { display: grid; }
+    .header { padding: 0 16px; gap: 8px; }
+    .date-box, .theme-pill .t-sun, .me .i { display: none; }
+    .theme-pill { padding: 3px; }
+    .top-search input[type=search] { padding-right: 12px; }
+    main { padding: 20px 16px 56px; }
+    .page-header h1 { font-size: 21px; }
+    .page-sub { margin-left: 0; }
+    .search-inline input[type=search] { width: 100%; }
+    .page-actions, .search-inline { width: 100%; }
+    .h-emoji { width: 38px; height: 38px; font-size: 18px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .card { padding: 18px; }
+    .stat-card .count { font-size: 28px; }
+    .bubble { max-width: 86%; }
+  }
+</style>
+</head>
+<body>
+{% set is_super = request.state.is_super_admin if request is defined else True %}
+{% set perms = request.state.admin_permissions if request is defined else {} %}
+{% set admin_name = request.state.admin_username if request is defined and request.state.admin_username is defined else 'admin' %}
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-logo" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="3"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1.5"/><rect width="7" height="5" x="14" y="3" rx="1.5"/><rect width="7" height="9" x="14" y="12" rx="1.5"/><rect width="7" height="5" x="3" y="16" rx="1.5"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-groups" viewBox="0 0 24 24"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.53 2.3a.53.53 0 0 1 .94 0l2.31 4.68a2.12 2.12 0 0 0 1.6 1.16l5.16.75a.53.53 0 0 1 .3.9l-3.74 3.64a2.12 2.12 0 0 0-.61 1.88l.88 5.14a.53.53 0 0 1-.77.56l-4.62-2.43a2.12 2.12 0 0 0-1.97 0L6.4 21.01a.53.53 0 0 1-.77-.56l.88-5.14a2.12 2.12 0 0 0-.61-1.88L2.16 9.8a.53.53 0 0 1 .3-.9l5.16-.76a2.12 2.12 0 0 0 1.6-1.16z"/></symbol>
+    <symbol id="i-support" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13a2 2 0 0 0 1.44 1.44l6.13 1.58a.5.5 0 0 1 0 .96l-6.13 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1"/></symbol>
+    <symbol id="i-hierarchy" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1.5"/><rect x="2" y="16" width="6" height="6" rx="1.5"/><rect x="9" y="2" width="6" height="6" rx="1.5"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></symbol>
+  </defs>
+</svg>
+
+<div class="nav-progress" id="nav-progress"></div>
+<div class="backdrop" id="backdrop"></div>
+<div class="tip" id="tip"></div>
+
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/dashboard">
+    <span class="logo"><svg class="i"><use href="#i-logo"/></svg></span>
+    <span class="brand-text"><b>TSUE Bot</b><small>Boshqaruv paneli</small></span>
+  </a>
+  <nav id="nav">
+    <span class="nav-indicator" id="nav-indicator"></span>
+    <a href="/dashboard" class="{{ 'active' if active == 'dashboard' else '' }}"><svg class="i"><use href="#i-dashboard"/></svg><span class="label">Statistika</span></a>
+    {% if is_super or perms.get('data') %}
+    <a href="/data" class="{{ 'active' if active == 'data' else '' }}"><svg class="i"><use href="#i-database"/></svg><span class="label">Ma'lumotlarni yangilash</span></a>
+    {% endif %}
+    {% if is_super or perms.get('users') %}
+    <a href="/users" class="{{ 'active' if active == 'users' else '' }}"><svg class="i"><use href="#i-users"/></svg><span class="label">Foydalanuvchilar</span></a>
+    {% endif %}
+    {% if is_super or perms.get('groups') %}
+    <a href="/groups" class="{{ 'active' if active == 'groups' else '' }}"><svg class="i"><use href="#i-groups"/></svg><span class="label">Guruhlar</span></a>
+    {% endif %}
+    {% if is_super or perms.get('ratings') %}
+    <a href="/ratings" class="{{ 'active' if active == 'ratings' else '' }}"><svg class="i"><use href="#i-star"/></svg><span class="label">Xizmat reytingi</span></a>
+    {% endif %}
+    {% if is_super or perms.get('support') %}
+    <a href="/support" class="{{ 'active' if active == 'support' else '' }}"><svg class="i"><use href="#i-support"/></svg><span class="label">Texnik bo'lim</span></a>
+    {% endif %}
+    {% if is_super or perms.get('broadcast') %}
+    <a href="/broadcast" class="{{ 'active' if active == 'broadcast' else '' }}"><svg class="i"><use href="#i-megaphone"/></svg><span class="label">Reklama yuborish</span></a>
+    {% endif %}
+    {% if is_super or perms.get('import_legacy') %}
+    <a href="/import" class="{{ 'active' if active == 'import' else '' }}"><svg class="i"><use href="#i-download"/></svg><span class="label">Eski botdan import</span></a>
+    {% endif %}
+    {% if is_super or perms.get('new_items') %}
+    <a href="/new-items" class="{{ 'active' if active == 'new-items' else '' }}"><svg class="i"><use href="#i-sparkles"/></svg><span class="label">Yangi topilganlar</span></a>
+    {% endif %}
+    <div class="section-label"><span class="label">Sozlamalar</span></div>
+    {% if is_super or perms.get('titles') %}
+    <a href="/names" class="{{ 'active' if active == 'names' else '' }}"><svg class="i"><use href="#i-tag"/></svg><span class="label">Sarlavha nomlari</span></a>
+    {% endif %}
+    {% if is_super or perms.get('hierarchy') %}
+    <a href="/hierarchy" class="{{ 'active' if active == 'hierarchy' else '' }}"><svg class="i"><use href="#i-hierarchy"/></svg><span class="label">Ierarxiya</span></a>
+    {% endif %}
+    {% if is_super or perms.get('start_message') %}
+    <a href="/start-message" class="{{ 'active' if active == 'start-message' else '' }}"><svg class="i"><use href="#i-message"/></svg><span class="label">/start xabari</span></a>
+    {% endif %}
+    {% if is_super or perms.get('calendar') %}
+    <a href="/calendar" class="{{ 'active' if active == 'calendar' else '' }}"><svg class="i"><use href="#i-calendar"/></svg><span class="label">Kalendar</span></a>
+    {% endif %}
+    {% if is_super or perms.get('errors') %}
+    <a href="/errors" class="{{ 'active' if active == 'errors' else '' }}"><svg class="i"><use href="#i-alert"/></svg><span class="label">Xatolar jurnali</span></a>
+    {% endif %}
+    {% if is_super %}
+    <a href="/backup" class="{{ 'active' if active == 'backup' else '' }}"><svg class="i"><use href="#i-download"/></svg><span class="label">Zaxira</span></a>
+    {% endif %}
+    {% if is_super %}
+    <a href="/admins" class="{{ 'active' if active == 'admins' else '' }}"><svg class="i"><use href="#i-shield"/></svg><span class="label">Adminlar</span></a>
+    {% endif %}
+  </nav>
+  <div class="sidebar-footer">
+    <button class="collapse-btn" id="collapse-btn" type="button" aria-label="Yon panelni yig'ish">
+      <svg class="i"><use href="#i-panel"/></svg><span class="label">Panelni yig'ish</span>
+    </button>
+  </div>
+</aside>
+
+<div class="shell">
+  <header class="header" id="header">
+    <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Menyu"><svg class="i"><use href="#i-menu"/></svg></button>
+    <form class="top-search" method="get" action="/users" role="search">
+      <svg class="i"><use href="#i-search"/></svg>
+      <input type="search" name="q" placeholder="Foydalanuvchi, guruh, o'qituvchi yoki fan qidirish…" autocomplete="off">
+      <kbd id="search-btn" title="Bo'limlarga tez o'tish">Ctrl K</kbd>
+    </form>
+    <div class="spacer"></div>
+    <div class="bell">
+      <button class="icon-btn" id="bell-btn" type="button" aria-label="Bildirishnomalar"><svg class="i"><use href="#i-bell"/></svg></button>
+      <div class="bell-menu" id="bell-menu"><b>Bildirishnomalar</b><div id="bell-list"><div class="none">Yuklanmoqda…</div></div></div>
+    </div>
+    <button class="theme-pill" id="theme-btn" type="button" aria-label="Mavzuni almashtirish">
+      <span class="t-sun"><svg class="i"><use href="#i-sun"/></svg></span><span class="t-moon"><svg class="i"><use href="#i-moon"/></svg></span>
+    </button>
+    <div class="date-box" title="Toshkent vaqti"><b id="clock-time">—</b><small id="clock-day"></small></div>
+    <div class="me" title="{{ admin_name }}">
+      <div class="avatar">{{ ((admin_name or 'admin')[:2])|upper }}</div><svg class="i"><use href="#i-chevron"/></svg>
+    </div>
+  </header>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<div class="cmdk" id="cmdk" aria-hidden="true">
+  <div class="cmdk-panel" role="dialog" aria-label="Bo'limlarni qidirish">
+    <div class="cmdk-input"><svg class="i"><use href="#i-search"/></svg><input id="cmdk-input" type="text" placeholder="Bo'lim nomini yozing…" autocomplete="off"></div>
+    <div class="cmdk-list" id="cmdk-list"></div>
+    <div class="cmdk-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> tanlash</span><span><kbd>Enter</kbd> ochish</span><span><kbd>Esc</kbd> yopish</span></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function store(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
+
+  /* ---------- Mavzu (yorug' / qorong'i) ---------- */
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function syncThemeClass() { root.classList.toggle('is-dark', isDark()); }
+  syncThemeClass();
+  var themeBtn = document.getElementById('theme-btn');
+  themeBtn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    function apply() { root.setAttribute('data-theme', next); store('tsue_admin_theme', next); syncThemeClass(); }
+    if (!document.startViewTransition || reduceMotion) { apply(); return; }
+    // Tugmadan aylana shaklida yoyilib, yangi mavzu ochiladi
+    var r = themeBtn.getBoundingClientRect();
+    var x = r.left + r.width / 2, y = r.top + r.height / 2;
+    var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    root.classList.add('vt-theme');
+    var vt = document.startViewTransition(apply);
+    vt.finished.finally(function () { root.classList.remove('vt-theme'); });
+    vt.ready.then(function () {
+      root.animate(
+        { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + end + 'px at ' + x + 'px ' + y + 'px)'] },
+        { duration: 550, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', pseudoElement: '::view-transition-new(root)' }
+      );
+    });
+  });
+
+  /* ---------- Yon panel: faol bo'lim ko'rsatkichi ---------- */
+  var nav = document.getElementById('nav');
+  var indicator = document.getElementById('nav-indicator');
+  var activeLink = nav.querySelector('a.active');
+  function placeIndicator(animate) {
+    if (!activeLink) return;
+    if (!animate) indicator.style.transition = 'none';
+    indicator.style.top = activeLink.offsetTop + 'px';
+    indicator.style.height = activeLink.offsetHeight + 'px';
+    indicator.style.opacity = 1;
+    if (!animate) { void indicator.offsetHeight; indicator.style.transition = ''; }
+  }
+  if (activeLink) {
+    // Oldingi sahifadagi joyidan yangisiga "sirpanib" o'tadi
+    var prevTop = null;
+    try { prevTop = sessionStorage.getItem('tsue_nav_top'); } catch (e) {}
+    if (prevTop !== null && !reduceMotion) {
+      indicator.style.transition = 'none';
+      indicator.style.top = prevTop + 'px';
+      indicator.style.height = activeLink.offsetHeight + 'px';
+      indicator.style.opacity = 1;
+      void indicator.offsetHeight;
+      indicator.style.transition = '';
+      requestAnimationFrame(function () { placeIndicator(true); });
+    } else {
+      placeIndicator(false);
+    }
+    try { sessionStorage.setItem('tsue_nav_top', activeLink.offsetTop); } catch (e) {}
+    var crumb = activeLink.querySelector('.label');
+    var crumbEl = document.getElementById('crumb-current');
+    if (crumb && crumbEl) crumbEl.textContent = crumb.textContent;
+    if (activeLink.offsetTop > nav.clientHeight - 60) nav.scrollTop = activeLink.offsetTop - nav.clientHeight / 2;
+  }
+
+  /* ---------- Yon panelni yig'ish / mobil menyu ---------- */
+  var sidebar = document.getElementById('sidebar');
+  var backdrop = document.getElementById('backdrop');
+  document.getElementById('collapse-btn').addEventListener('click', function () {
+    var collapsed = root.getAttribute('data-sidebar') === 'collapsed';
+    if (collapsed) root.removeAttribute('data-sidebar'); else root.setAttribute('data-sidebar', 'collapsed');
+    store('tsue_admin_sidebar', collapsed ? 'open' : 'collapsed');
+    setTimeout(function () { placeIndicator(true); }, 340);
+  });
+  function closeMenu() { sidebar.classList.remove('open'); backdrop.classList.remove('open'); }
+  document.getElementById('menu-btn').addEventListener('click', function () {
+    var open = !sidebar.classList.contains('open');
+    sidebar.classList.toggle('open', open);
+    backdrop.classList.toggle('open', open);
+  });
+  backdrop.addEventListener('click', closeMenu);
+
+  // Yig'ilgan holatda sichqoncha ustiga borganda bo'lim nomini ko'rsatish
+  var tip = document.getElementById('tip');
+  nav.addEventListener('mouseover', function (e) {
+    var a = e.target.closest('a');
+    if (!a || root.getAttribute('data-sidebar') !== 'collapsed' || innerWidth <= 900) return;
+    var r = a.getBoundingClientRect();
+    tip.textContent = a.querySelector('.label').textContent;
+    tip.style.left = (r.right + 12) + 'px';
+    tip.style.top = (r.top + r.height / 2 - 15) + 'px';
+    tip.classList.add('show');
+  });
+  nav.addEventListener('mouseout', function () { tip.classList.remove('show'); });
+
+  /* ---------- Yuqori panel soyasi ---------- */
+  var header = document.getElementById('header');
+  function onScroll() { header.classList.toggle('scrolled', scrollY > 4); }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Toshkent vaqti (jonli soat, UTC+5) ---------- */
+  var DAYS = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'];
+  var MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr'];
+  var clockTime = document.getElementById('clock-time');
+  var clockDay = document.getElementById('clock-day');
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tick() {
+    var t = new Date(Date.now() + 5 * 3600000);
+    clockTime.textContent = t.getUTCDate() + '-' + MONTHS[t.getUTCMonth()] + ' ' + t.getUTCFullYear() + ', ' +
+      pad(t.getUTCHours()) + ':' + pad(t.getUTCMinutes());
+    clockDay.textContent = DAYS[t.getUTCDay()];
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- Sarlavha va ogohlantirishlardagi emojilar ---------- */
+  var EMOJI = /^\s*(\p{Extended_Pictographic}(?:️|‍\p{Extended_Pictographic})*)\s*/u;
+  // Sarlavhadagi emoji o'rniga menyudagi shu bo'lim ikonkasi chiqadi
+  // (chat sahifalarida - xabar ikonkasi).
+  var navIcon = activeLink ? activeLink.querySelector('use').getAttribute('href') : '#i-message';
+  document.querySelectorAll('.page-header h1').forEach(function (h) {
+    var first = h.firstChild;
+    if (!first || first.nodeType !== 3) return;
+    var m = first.nodeValue.match(EMOJI);
+    if (m) first.nodeValue = first.nodeValue.slice(m[0].length);
+    var span = document.createElement('span');
+    span.className = 'h-icon';
+    span.innerHTML = '<svg class="i"><use href="' + navIcon + '"/></svg>';
+    h.insertBefore(span, h.firstChild);
+  });
+  document.querySelectorAll('main .success, main .error, main .info').forEach(function (al) {
+    var first = al.firstChild;
+    if (first && first.nodeType === 3) first.nodeValue = first.nodeValue.replace(EMOJI, '');
+    var x = document.createElement('button');
+    x.type = 'button';
+    x.className = 'alert-close';
+    x.setAttribute('aria-label', 'Yopish');
+    x.innerHTML = '&times;';
+    x.addEventListener('click', function () {
+      al.classList.add('alert-out');
+      setTimeout(function () { al.remove(); }, 300);
+    });
+    al.appendChild(x);
+  });
+
+  /* ---------- Jadvallardagi vaqtlar: Toshkent vaqtida, o'qilishi oson ---------- */
+  // Bazada vaqt UTC'da saqlanadi ("2026-10-03T10:05:12"). Jadval
+  // kataklarida shunday vaqt bo'lsa, Toshkent vaqtiga (UTC+5)
+  // o'tkazib "03.10.2026 15:05" ko'rinishida chiqaramiz.
+  var ISO = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?$/;
+  document.querySelectorAll('main td').forEach(function (td) {
+    if (td.children.length) return;
+    var raw = td.textContent.trim(), m = raw.match(ISO);
+    if (!m) return;
+    var t = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]) + 5 * 3600000);
+    td.textContent = pad(t.getUTCDate()) + '.' + pad(t.getUTCMonth() + 1) + '.' + t.getUTCFullYear() + ' ' +
+      pad(t.getUTCHours()) + ':' + pad(t.getUTCMinutes());
+    td.title = 'Toshkent vaqti';
+    td.style.whiteSpace = 'nowrap';
+  });
+
+  /* ---------- Paydo bo'lish animatsiyalari ---------- */
+  if (!reduceMotion) {
+    var main = document.getElementById('main');
+    var items = [];
+    Array.prototype.forEach.call(main.children, function (el) {
+      if (el.tagName === 'SCRIPT') return;
+      if (el.classList.contains('grid')) Array.prototype.push.apply(items, el.children);
+      else items.push(el);
+    });
+    items.slice(0, 16).forEach(function (el, i) { el.style.setProperty('--i', i); el.classList.add('reveal'); });
+    main.querySelectorAll('table tbody').forEach(function (tb) {
+      Array.prototype.slice.call(tb.rows, 0, 30).forEach(function (tr, i) { tr.style.setProperty('--i', i); tr.classList.add('reveal-row'); });
+    });
+  }
+
+  /* ---------- Bildirishnomalar (qo'ng'iroqcha) ---------- */
+  var bellBtn = document.getElementById('bell-btn');
+  var bellMenu = document.getElementById('bell-menu');
+  var bellList = document.getElementById('bell-list');
+  var TONES = { blue: '#2563eb', red: '#ef4444', orange: '#f97316', green: '#10b981' };
+  fetch('/api/notifications', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (d) {
+    bellList.innerHTML = '';
+    if (!d.items || !d.items.length) { bellList.innerHTML = '<div class="none">Yangi bildirishnoma yo\'q</div>'; return; }
+    var badge = document.createElement('span');
+    badge.className = 'badge-n';
+    badge.textContent = d.count;
+    bellBtn.appendChild(badge);
+    d.items.forEach(function (it) {
+      var a = document.createElement('a');
+      a.href = it.href;
+      a.innerHTML = '<span class="dot"></span><span></span>';
+      a.querySelector('.dot').style.background = TONES[it.tone] || '#9ca3af';
+      a.lastChild.textContent = it.text;
+      bellList.appendChild(a);
+    });
+  }).catch(function () { bellList.innerHTML = '<div class="none">Yuklab bo\'lmadi</div>'; });
+  bellBtn.addEventListener('click', function (e) { e.stopPropagation(); bellMenu.classList.toggle('open'); });
+  document.addEventListener('click', function (e) { if (!bellMenu.contains(e.target)) bellMenu.classList.remove('open'); });
+
+  /* ---------- Raqamlarni sanab chiqish (statistika kartalari) ---------- */
+  document.querySelectorAll('.stat-card .count, [data-count]').forEach(function (el) {
+    var raw = el.textContent.trim();
+    if (reduceMotion || !/^\d+$/.test(raw)) return;
+    var target = parseInt(raw, 10);
+    if (!target) return;
+    var start = null, dur = 1100;
+    function step(ts) {
+      if (start === null) start = ts;
+      var k = Math.min(1, (ts - start) / dur);
+      el.textContent = String(Math.round(target * (1 - Math.pow(1 - k, 4))));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    el.textContent = '0';
+    requestAnimationFrame(step);
+  });
+
+  /* ---------- Kartadagi yorug'lik sichqonchaga ergashadi ---------- */
+  document.querySelectorAll('.stat-card').forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---------- Tugmalar: to'lqin effekti va yuklanish holati ---------- */
+  document.addEventListener('pointerdown', function (e) {
+    var btn = e.target.closest('.btn');
+    if (!btn || reduceMotion) return;
+    var r = btn.getBoundingClientRect();
+    var size = Math.max(r.width, r.height) * 2.2;
+    var s = document.createElement('span');
+    s.className = 'ripple';
+    s.style.width = s.style.height = size + 'px';
+    s.style.left = (e.clientX - r.left - size / 2) + 'px';
+    s.style.top = (e.clientY - r.top - size / 2) + 'px';
+    btn.appendChild(s);
+    setTimeout(function () { s.remove(); }, 650);
+  });
+  var progress = document.getElementById('nav-progress');
+  function startProgress() { progress.classList.remove('run'); void progress.offsetWidth; progress.classList.add('run'); }
+  // Bubbling bosqichida tinglaymiz - sahifadagi o'z skriptlari (masalan
+  // confirm() bilan) yuborishni bekor qilsa, spinner ko'rsatilmaydi.
+  document.addEventListener('submit', function (e) {
+    if (e.defaultPrevented || e.target.target) return;
+    var b = e.submitter;
+    // Tugmani "disabled" qilmaymiz - aks holda uning name/value qiymati
+    // formaga qo'shilmay qoladi. Faqat ko'rinishini o'zgartiramiz.
+    if (b && b.classList.contains('btn')) b.classList.add('is-loading');
+    startProgress();
+  });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target || a.hasAttribute('download')) return;
+    var href = a.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || href.indexOf('javascript:') === 0 || a.origin !== location.origin) return;
+    if (a.pathname === location.pathname && a.search === location.search) return;
+    try { if (activeLink) sessionStorage.setItem('tsue_nav_top', activeLink.offsetTop); } catch (err) {}
+    startProgress();
+  });
+  addEventListener('pageshow', function () {
+    progress.classList.remove('run');
+    document.querySelectorAll('.btn.is-loading').forEach(function (b) { b.classList.remove('is-loading'); });
+  });
+
+  /* ---------- Buyruqlar oynasi (Ctrl+K) ---------- */
+  var cmdk = document.getElementById('cmdk');
+  var cmdkInput = document.getElementById('cmdk-input');
+  var cmdkList = document.getElementById('cmdk-list');
+  var entries = Array.prototype.map.call(nav.querySelectorAll('a'), function (a) {
+    return { href: a.getAttribute('href'), label: a.querySelector('.label').textContent, icon: a.querySelector('use').getAttribute('href') };
+  });
+  var sel = 0, shown = [];
+  function render() {
+    var q = cmdkInput.value.trim().toLowerCase();
+    shown = entries.filter(function (it) { return !q || it.label.toLowerCase().indexOf(q) !== -1; });
+    sel = Math.min(sel, Math.max(0, shown.length - 1));
+    cmdkList.innerHTML = '';
+    if (!shown.length) { cmdkList.innerHTML = '<div class="cmdk-empty">Hech narsa topilmadi</div>'; return; }
+    shown.forEach(function (it, i) {
+      var a = document.createElement('a');
+      a.className = 'cmdk-item' + (i === sel ? ' sel' : '');
+      a.href = it.href;
+      a.innerHTML = '<svg class="i"><use href="' + it.icon + '"/></svg><span></span><kbd>Enter</kbd>';
+      a.querySelector('span').textContent = it.label;
+      a.addEventListener('mousemove', function () { if (sel !== i) { sel = i; render(); } });
+      cmdkList.appendChild(a);
+    });
+  }
+  function openCmdk() {
+    cmdk.classList.add('open');
+    cmdk.setAttribute('aria-hidden', 'false');
+    cmdkInput.value = '';
+    sel = 0;
+    render();
+    cmdkInput.focus();
+  }
+  function closeCmdk() { cmdk.classList.remove('open'); cmdk.setAttribute('aria-hidden', 'true'); }
+  document.getElementById('search-btn').addEventListener('click', openCmdk);
+  cmdk.addEventListener('click', function (e) { if (e.target === cmdk) closeCmdk(); });
+  cmdkInput.addEventListener('input', function () { sel = 0; render(); });
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (cmdk.classList.contains('open')) closeCmdk(); else openCmdk();
+      return;
+    }
+    if (!cmdk.classList.contains('open')) { if (e.key === 'Escape') closeMenu(); return; }
+    if (e.key === 'Escape') closeCmdk();
+    else if (e.key === 'ArrowDown' && shown.length) { e.preventDefault(); sel = (sel + 1) % shown.length; render(); }
+    else if (e.key === 'ArrowUp' && shown.length) { e.preventDefault(); sel = (sel - 1 + shown.length) % shown.length; render(); }
+    else if (e.key === 'Enter' && shown[sel]) { e.preventDefault(); startProgress(); location.href = shown[sel].href; }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>{{ title }}</h1>
+  <a class="btn secondary" href="/data">⬅️ Orqaga</a>
+</div>
+
+{% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('data') == 'edit' %}
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+{% if request.query_params.get('saved') %}<div class="success">✅ Saqlandi.</div>{% endif %}
+{% if not can_edit %}<div class="info">🔒 Sizda faqat ko'rish huquqi bor - o'zgartirish va saqlash mumkin emas.</div>{% endif %}
+
+<div class="card">
+  <form method="post" action="/file/{{ name }}">
+    <textarea class="code" name="content" spellcheck="false" {% if not can_edit %}readonly{% endif %}>{{ content }}</textarea>
+    {% if can_edit %}
+    <div class="toolbar">
+      <button class="btn" type="submit">💾 Saqlash</button>
+    </div>
+    {% endif %}
+  </form>
+</div>
+
+{% if can_edit %}
+<div class="card">
+  <h3 style="margin-top:0">Yoki faylni to'liq almashtiring</h3>
+  <form method="post" action="/file/{{ name }}/upload" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".json" required>
+    <div class="toolbar">
+      <button class="btn" type="submit">⬆️ Yuklash va almashtirish</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

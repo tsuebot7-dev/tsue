@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Zaxira — TSUE Bot Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div class="page-title"><h1>Zaxira</h1>
+  <p class="page-sub">Botning barcha ma'lumotlari — foydalanuvchilar bazasi va guruh/o'qituvchi/xona fayllari — bitta zip faylda. Muntazam yuklab olib qo'ying: server bilan muammo bo'lsa, shu fayldan bir bosishda tiklanadi.</p></div>
+</div>
+
+{% if result %}<div class="success">Tiklandi: {{ result }}. Bot yangi ma'lumotlar bilan ishlayapti.</div>{% endif %}
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+<div class="grid">
+  <div class="stat-card">
+    <h3>Foydalanuvchilar</h3>
+    <div class="count">{{ users }}</div>
+    <div class="meta">bazada</div>
+  </div>
+  <div class="stat-card">
+    <h3>Saqlash joyi</h3>
+    <div class="count" style="font-size:20px">{{ 'PostgreSQL' if postgres else 'SQLite + fayllar' }}</div>
+    <div class="meta mono">{{ data_dir }}</div>
+  </div>
+</div>
+
+<div class="card flush">
+  <table>
+    <thead><tr><th>Fayl</th><th>Hajmi</th><th>Holat</th></tr></thead>
+    <tbody>
+      {% for f in files %}
+      <tr>
+        <td class="mono">{{ f.name }}</td>
+        <td>{{ f.size_kb }} KB</td>
+        <td>{% if f.exists %}<span class="badge green">Bor</span>{% else %}<span class="badge red">Yo'q</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>⬇️ Zaxirani yuklab olish</h3>
+    <p class="muted">Hozirgi holatning to'liq nusxasi (.zip). Bot ishlab turganda ham xavfsiz olinadi.</p>
+    <div class="toolbar"><a class="btn" href="/backup/download">Zaxirani yuklab olish</a></div>
+  </div>
+  <div class="card">
+    <h3>⬆️ Zaxiradan tiklash</h3>
+    <p class="muted">Diqqat: arxivdagi fayllar hozirgilarining <b>o'rniga</b> yoziladi. Avval hozirgi holatni yuklab oling.</p>
+    <form method="post" action="/backup/restore" enctype="multipart/form-data"
+          onsubmit="return confirm('Hozirgi ma\'lumotlar zaxiradagilar bilan almashtiriladi. Davom etasizmi?')">
+      <input type="file" name="file" accept=".zip" required>
+      <div class="toolbar"><button class="btn danger" type="submit">Tiklash</button></div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Ma'lumotlarni yangilash — TSUE Bot Admin{% endblock %}
+{% block content %}
+{% set can_edit = request.state.is_super_admin or request.state.admin_permissions.get('data') == 'edit' %}
+<div class="page-header">
+  <div class="page-title"><h1>📁 Ma'lumotlarni yangilash</h1>
+  <p class="page-sub">Har bir faylni ko'rish, tahrirlash yoki yangi versiyasini yuklash mumkin. Saqlangach, bot avtomatik ravishda yangi ma'lumotlardan foydalana boshlaydi (qayta ishga tushirishning hojati yo'q).</p></div>
+</div>
+<div class="grid">
+  {% for key, path in files.items() %}
+  <div class="stat-card">
+    <h3>{{ titles.get(key, key) }}</h3>
+    {% if stats[key].exists %}
+      <div class="count">{{ stats[key].count }}</div>
+      <div class="meta">ta yozuv &middot; {{ stats[key].size_kb }} KB</div>
+    {% else %}
+      <div class="count" style="color:#b91c1c">yo'q</div>
+      <div class="meta">fayl hali yaratilmagan</div>
+    {% endif %}
+    <a class="btn" href="/file/{{ key }}">Ochish / tahrirlash</a>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">🔄 TSUE bilan sinxronlash</h3>
+  <p style="color:var(--muted); margin-top:0">
+    Bot har <b>{{ refresh_hours }} soatda bir marta</b> TSUE saytidan butun universitet
+    jadvalini <b>bitta so'rov</b> bilan oladi va shundan avtomatik yangilaydi:
+    xonalar va o'qituvchilar ro'yxati (yangilari qo'shiladi), guruhlar havolalari
+    (fakultet/kurs tuzilishi o'zgarmaydi), bo'sh xonalar, jadval o'zgarishi
+    xabarlari va dars eslatmalari. Saytni minglab marta ochadigan eski
+    skanerlash endi yo'q — server bloklanmaydi.
+  </p>
+  {% if request.query_params.get('sync') %}<div class="info">⏳ Sinxronlash ishga tushdi. Bir necha soniyadan keyin sahifani yangilang.</div>{% endif %}
+  <p>
+    Holat:
+    {% if running %}
+      <span class="badge green">Sinxronlanmoqda…</span>
+    {% elif sync.at %}
+      <span class="badge green">Tayyor</span> — oxirgi sinxronlash: {{ sync_at }}
+      {% if sync.download_ok == false %}<span class="badge red">sayt javob bermadi, oxirgi saqlangan nusxa ishlatildi</span>{% endif %}
+    {% elif loaded %}
+      <span class="badge green">Jadval yuklangan</span>
+    {% else %}
+      <span class="badge red">Hali sinxronlanmagan</span>
+    {% endif %}
+  </p>
+  <p>
+    TSUE sayti bilan aloqa:
+    {% if site.site_ok %}
+      <span class="badge green">Bor</span> — oxirgi yuklash: {{ site.fetched_at }}
+    {% elif site.failed_at == '-' %}
+      <span class="badge green">Kutilmoqda</span>
+      <small class="muted">Jadval nusxasi yangi ({{ site.data_from }} holatidagi) — bot saytga {{ refresh_hours }} soatda bir marta murojaat qiladi.</small>
+    {% else %}
+      <span class="badge red">Yo'q</span>
+      <small class="muted">Sayt server IP'sini vaqtincha bloklagan bo'lishi mumkin. Bot oxirgi saqlangan jadval
+      nusxasi bilan ishlashda davom etadi ({{ site.data_from }} holatidagi) va sayt ochilishi bilan o'zi yangilaydi.
+      Oxirgi urinish: {{ site.failed_at }}.</small>
+    {% endif %}
+  </p>
+  {% if sync.at %}
+  <table>
+    <tbody>
+      <tr><td>Jadval yuklangan vaqt</td><td>{{ loaded_at }}{% if sync.validity %} · amal qiladi: {{ sync.validity }}{% endif %} · versiya {{ sync.tt_num }}</td></tr>
+      <tr><td>🎓 Guruhlar</td><td>{{ sync.groups_total }} ta saytda · {{ sync.groups_updated }} ta havola yangilandi{% if sync.groups_new %} · <a href="/new-items">{{ sync.groups_new }} ta yangi guruh</a>{% endif %}</td></tr>
+      <tr><td>👨‍🏫 O'qituvchilar</td><td>{{ sync.teachers_added }} ta qo'shildi · {{ sync.teachers_updated }} ta havola yangilandi</td></tr>
+      <tr><td>🚪 Xonalar</td><td>{{ sync.rooms_added }} ta qo'shildi · {{ sync.rooms_updated }} ta havola yangilandi</td></tr>
+      <tr><td>🟢 Bo'sh xonalar</td><td>{{ sync.free_rooms }} ta xona hisoblandi</td></tr>
+      <tr><td>🔔 Jadvali o'zgargan guruhlar</td><td>{{ sync.changed_groups }} ta (foydalanuvchilarga xabar yuborildi)</td></tr>
+      <tr><td>⏰ Eslatma nusxalari</td><td>{{ sync.reminder_snapshots_updated }} ta yangilandi</td></tr>
+    </tbody>
+  </table>
+  {% endif %}
+  {% if can_edit %}
+  <form method="post" action="/data/sync-now">
+    <div class="toolbar">
+      <button class="btn" type="submit" {% if running %}disabled{% endif %}>🔄 Hozir sinxronlash</button>
+    </div>
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Boshqa amallar</h3>
+  {% if can_edit %}
+  <form class="inline" method="post" action="/reload">
+    <button class="btn secondary" type="submit">🔄 Ma'lumotlarni qayta yuklash</button>
+  </form>
+  {% else %}
+  <p class="perm-none">🔒 Bu amal uchun to'liq huquq kerak.</p>
+  {% endif %}
+</div>
+{% endblock %}

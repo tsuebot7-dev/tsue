@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+{% block title %}Bosh sahifa — TSUE Bot Admin{% endblock %}
+{% block content %}
+<style>
+  .welcome { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
+  .welcome h1 { font-size: 27px; margin: 0 0 6px; letter-spacing: -0.03em; }
+  .welcome p { color: var(--muted); margin: 0; max-width: 560px; }
+  .status-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 16px; min-width: 260px; box-shadow: var(--shadow-sm);
+  }
+  .status-card .st { display: flex; align-items: center; gap: 8px; font-weight: 650; }
+  .status-dot { width: 9px; height: 9px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite; flex-shrink: 0; }
+  .status-dot.off { background: #9ca3af; animation: none; }
+  .status-card small { display: block; color: var(--muted); margin: 4px 0 10px; font-size: 12px; }
+  .status-card form { display: flex; justify-content: flex-end; }
+  .status-card .btn { height: 32px; font-size: 12.5px; padding: 0 12px; }
+
+  .kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .kpi {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow-sm);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s ease;
+  }
+  .kpi:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .kpi-top { display: flex; align-items: center; gap: 11px; }
+  .tile { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
+  .tile .i { width: 21px; height: 21px; }
+  .tone-blue { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+  .tone-green { background: rgba(16, 185, 129, 0.12); color: #059669; }
+  .tone-purple { background: rgba(139, 92, 246, 0.12); color: #7c3aed; }
+  .tone-orange { background: rgba(249, 115, 22, 0.12); color: #ea580c; }
+  .tone-teal { background: rgba(20, 184, 166, 0.12); color: #0d9488; }
+  .tone-red { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+  .kpi-label { font-size: 12.5px; color: var(--muted); font-weight: 550; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kpi-value { font-size: 26px; font-weight: 750; letter-spacing: -0.03em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .kpi-foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 12px; color: var(--muted); }
+  .trend { font-weight: 700; display: inline-flex; align-items: center; gap: 2px; }
+  .trend.up { color: #059669; }
+  .trend.down { color: #dc2626; }
+
+  .row { display: grid; gap: 20px; margin-bottom: 20px; }
+  .row-2 { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1.1fr); }
+  .row-3 { grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.8fr) minmax(0, 0.95fr); }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); min-width: 0; overflow-x: auto; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .panel-title { display: flex; align-items: center; gap: 10px; }
+  .panel-title .tile { width: 34px; height: 34px; border-radius: 10px; }
+  .panel-title .tile .i { width: 17px; height: 17px; }
+  .panel-title b { font-size: 15px; display: block; }
+  .panel-title small { color: var(--muted); font-size: 12px; }
+  .chip-btn {
+    height: 30px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); color: var(--text); font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center;
+  }
+  .chip-btn:hover { border-color: var(--border-strong); }
+  .seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 3px; }
+  .seg button { border: 0; background: transparent; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--muted);
+               padding: 4px 12px; border-radius: 7px; cursor: pointer; transition: all 0.2s ease; }
+  .seg button.on { background: var(--card); color: var(--text); box-shadow: var(--shadow-sm); }
+  .chart-box { position: relative; height: 270px; }
+
+  .donut-wrap { display: flex; align-items: center; gap: 22px; }
+  .donut-box { position: relative; width: 170px; height: 170px; flex-shrink: 0; }
+  .donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+  .donut-center b { font-size: 24px; letter-spacing: -0.02em; }
+  .donut-center small { color: var(--muted); font-size: 12px; }
+  .legend { flex: 1; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .legend-row { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; font-size: 13px; }
+  .legend-row > span:nth-child(2) { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .legend-row .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-row .num { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .legend-row .pc { color: var(--muted); width: 40px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  .users-table td, .users-table th { padding: 10px 6px; white-space: nowrap; }
+  .users-table td.grp { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
+  .u { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .u-av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .u a { font-weight: 600; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+  .pill { font-size: 11.5px; font-weight: 650; padding: 3px 10px; border-radius: 999px; }
+  .pill.on { background: var(--success-bg); color: var(--success-text); }
+  .pill.off { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+
+  .quick { display: flex; flex-direction: column; gap: 10px; }
+  .quick a, .quick button {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--surface-2); color: var(--text); text-decoration: none; font: inherit; font-weight: 600; font-size: 13.5px;
+    cursor: pointer; text-align: left;
+    transition: transform 0.25s var(--ease-spring), border-color 0.2s ease, background 0.2s ease;
+  }
+  .quick a:hover, .quick button:hover { transform: translateX(4px); border-color: rgba(var(--primary-rgb), 0.35); background: var(--card); }
+  .quick .tile { width: 34px; height: 34px; border-radius: 10px; }
+  .quick .tile .i { width: 17px; height: 17px; }
+
+  .feed { display: flex; flex-direction: column; gap: 14px; }
+  .feed-item { display: grid; grid-template-columns: 10px 1fr; gap: 12px; font-size: 13.5px; }
+  .feed-item .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; }
+  .feed-item a { color: var(--text); text-decoration: none; }
+  .feed-item a:hover { color: var(--primary); }
+  .feed-item small { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+  .empty { color: var(--muted); font-size: 13px; padding: 10px 0; }
+
+  @media (max-width: 1280px) {
+    .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .row-3 { grid-template-columns: 1fr 1fr; }
+    .row-3 > :first-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 900px) {
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .row-2, .row-3 { grid-template-columns: 1fr; }
+    .donut-wrap { flex-direction: column; align-items: stretch; }
+    .donut-box { margin: 0 auto; }
+    .status-card { width: 100%; }
+    .kpi { padding: 14px; }
+    .kpi .tile { width: 36px; height: 36px; border-radius: 10px; }
+    .kpi .tile .i { width: 18px; height: 18px; }
+    .kpi-value { font-size: 22px; }
+    .kpi-foot { flex-wrap: wrap; gap: 4px 8px; margin-top: 10px; }
+  }
+</style>
+
+{% set tones = {'blue': '#2563eb', 'green': '#10b981', 'purple': '#8b5cf6', 'orange': '#f97316', 'teal': '#14b8a6', 'red': '#ef4444'} %}
+{% set av_colors = ['#2563eb', '#8b5cf6', '#10b981', '#f97316', '#ec4899', '#14b8a6'] %}
+{% set dcolors = ['#2563eb', '#8b5cf6', '#ec4899'] %}
+
+<div class="welcome">
+  <div>
+    <h1>Xush kelibsiz, {{ admin_name|capitalize }}! 👋</h1>
+    <p>TSUE dars jadvali botining admin paneliga xush kelibsiz. Bu yerda bot faoliyati, foydalanuvchilar va ma'lumotlar haqida to'liq ma'lumotni ko'rishingiz mumkin.</p>
+  </div>
+  <div class="status-card">
+    <div class="st"><span class="status-dot {{ '' if bot_online else 'off' }}"></span>{{ 'Bot onlayn' if bot_online else "Bot ishga tushmagan" }}</div>
+    <small>Oxirgi faollik: {{ last_activity }}{% if sync_at %}<br>Jadval yangilangan: {{ sync_at }}{% endif %}</small>
+    {% if request.state.is_super_admin or request.state.admin_permissions.get('data') == 'edit' %}
+    <form method="post" action="/data/sync-now">
+      <button class="btn secondary" type="submit"><svg class="i" style="width:15px;height:15px"><use href="#i-refresh"/></svg> Ma'lumotlarni yangilash</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+<div class="kpis">
+  {% for k in kpis %}
+  <div class="kpi">
+    <div class="kpi-top">
+      <div class="tile tone-{{ k.tone }}"><svg class="i"><use href="#i-{{ k.icon }}"/></svg></div>
+      <div style="min-width:0">
+        <div class="kpi-label">{{ k.label }}</div>
+        <div class="kpi-value" data-count="{{ k.value }}">{{ k.value }}</div>
+      </div>
+    </div>
+    <div class="kpi-foot">
+      {% if k.trend is not none %}
+      <span class="trend {{ 'up' if k.trend >= 0 else 'down' }}">{{ '↑' if k.trend >= 0 else '↓' }} {{ k.trend|abs }}%</span>
+      {% endif %}
+      <span>{{ k.note }}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row row-2">
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">
+        <div class="tile tone-blue"><svg class="i"><use href="#i-users"/></svg></div>
+        <div><b>Foydalanuvchilar faolligi</b><small id="chart-sub">So'nggi 7 kunlik statistika</small></div>
+      </div>
+      <div class="seg" id="range"><button type="button" class="on" data-days="7">Hafta</button><button type="button" data-days="30">Oy</button></div>
+    </div>
+    <div class="chart-box"><canvas id="activity"></canvas></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">
+        <div class="tile tone-purple"><svg class="i"><use href="#i-dashboard"/></svg></div>
+        <div><b>Jadval ko'rishlari taqsimoti</b><small>So'nggi 30 kun</small></div>
+      </div>
+    </div>
+    <div class="donut-wrap">
+      <div class="donut-box"><canvas id="donut"></canvas><div class="donut-center"><b data-count="{{ donut_total }}">{{ donut_total }}</b><small>jami</small></div></div>
+      <div class="legend">
+        {% for d in donut %}
+        <div class="legend-row">
+          <span class="dot" style="background:{{ dcolors[loop.index0] }}"></span>
+          <span>{{ d.label }}</span>
+          <span class="num">{{ d.value }}</span>
+          <span class="pc">{{ ((d.value * 100 / donut_total)|round|int) if donut_total else 0 }}%</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row row-3">
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title"><span class="status-dot"></span><b>So'nggi faol foydalanuvchilar</b></div>
+      <a class="chip-btn" href="/users">Barchasi</a>
+    </div>
+    {% if recent %}
+    <table class="users-table">
+      <thead><tr><th>Foydalanuvchi</th><th>Guruh</th><th>Vaqt</th><th>Holat</th></tr></thead>
+      <tbody>
+        {% for u in recent %}
+        <tr>
+          <td><div class="u">
+            <span class="u-av" style="background:{{ av_colors[loop.index0 % 6] }}">{{ u.initials }}</span>
+            <a href="/users/{{ u.id }}/chat" title="{{ u.name }}">{{ '@' ~ u.username if u.username else u.name }}</a>
+          </div></td>
+          <td class="grp" title="{{ u.group }}">{{ u.group }}</td>
+          <td title="{{ u.time_full }}">{{ u.time }}</td>
+          <td><span class="pill {{ 'on' if u.online else 'off' }}">{{ 'Online' if u.online else 'Offline' }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<div class="empty">Hali faollik yo'q.</div>{% endif %}
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><svg class="i" style="color:var(--primary)"><use href="#i-zap"/></svg><b>Tezkor bo'limlar</b></div></div>
+    <div class="quick">
+      <a href="/data"><span class="tile tone-blue"><svg class="i"><use href="#i-calendar"/></svg></span>Jadval ma'lumotlari</a>
+      <form method="post" action="/data/sync-now" style="margin:0"><button type="submit"><span class="tile tone-green"><svg class="i"><use href="#i-refresh"/></svg></span>TSUE'dan ma'lumot olish</button></form>
+      <a href="/broadcast"><span class="tile tone-orange"><svg class="i"><use href="#i-megaphone"/></svg></span>E'lon yuborish</a>
+      <a href="/support"><span class="tile tone-purple"><svg class="i"><use href="#i-message"/></svg></span>Murojaatlarga javob</a>
+      <a href="/calendar"><span class="tile tone-teal"><svg class="i"><use href="#i-bell"/></svg></span>Eslatmalar va kalendar</a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title"><svg class="i" style="color:var(--primary)"><use href="#i-megaphone"/></svg><b>Oxirgi xabarlar</b></div>
+      <a class="chip-btn" href="/errors">Barchasi</a>
+    </div>
+    {% if feed %}
+    <div class="feed">
+      {% for f in feed %}
+      <div class="feed-item">
+        <span class="dot" style="background:{{ tones.get(f.tone, '#9ca3af') }}"></span>
+        <div>{% if f.href %}<a href="{{ f.href }}">{{ f.text }}</a>{% else %}{{ f.text }}{% endif %}{% if f.time %}<small>{{ f.time }}</small>{% endif %}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}<div class="empty">Hozircha yangi xabar yo'q.</div>{% endif %}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+(function () {
+  if (!window.Chart) return;
+  var data = {{ chart|tojson }};
+  var donut = {{ donut|tojson }};
+  var css = getComputedStyle(document.documentElement);
+  var grid = css.getPropertyValue('--border').trim() || '#e5e7eb';
+  Chart.defaults.font.family = css.getPropertyValue('--font');
+  Chart.defaults.color = css.getPropertyValue('--muted').trim() || '#6b7280';
+
+  var ctx = document.getElementById('activity').getContext('2d');
+  var grad = ctx.createLinearGradient(0, 0, 0, 260);
+  grad.addColorStop(0, 'rgba(37, 99, 235, 0.22)');
+  grad.addColorStop(1, 'rgba(37, 99, 235, 0)');
+  function slice(n) {
+    return { labels: data.labels.slice(-n), users: data.users.slice(-n), views: data.views.slice(-n) };
+  }
+  var s = slice(7);
+  var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: s.labels,
+      datasets: [
+        { label: 'Faol foydalanuvchilar', data: s.users, borderColor: '#2563eb', backgroundColor: grad, fill: true,
+          tension: 0.38, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#2563eb', pointBorderColor: '#fff',
+          pointBorderWidth: 2, pointHoverRadius: 6 },
+        { label: "Jadval ko'rishlari", data: s.views, borderColor: '#8b5cf6', borderDash: [5, 5], fill: false,
+          tension: 0.38, borderWidth: 2, pointRadius: 0, pointHoverRadius: 5 }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      animation: { duration: 1100, easing: 'easeOutQuart' },
+      plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, padding: 18 } },
+                 tooltip: { padding: 10, cornerRadius: 10, boxPadding: 4 } },
+      scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: grid }, ticks: { precision: 0 } } }
+    }
+  });
+  document.querySelectorAll('#range button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#range button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      var n = parseInt(b.dataset.days, 10), d = slice(n);
+      chart.data.labels = d.labels;
+      chart.data.datasets[0].data = d.users;
+      chart.data.datasets[1].data = d.views;
+      chart.data.datasets[0].pointRadius = n > 7 ? 2 : 4;
+      chart.update();
+      document.getElementById('chart-sub').textContent = n > 7 ? "So'nggi 30 kunlik statistika" : "So'nggi 7 kunlik statistika";
+    });
+  });
+
+  new Chart(document.getElementById('donut'), {
+    type: 'doughnut',
+    data: { labels: donut.map(function (d) { return d.label; }),
+            datasets: [{ data: donut.map(function (d) { return d.value; }), backgroundColor: ['#2563eb', '#8b5cf6', '#ec4899'],
+                         borderWidth: 0, hoverOffset: 8, borderRadius: 4, spacing: 2 }] },
+    options: { cutout: '72%', maintainAspectRatio: false, animation: { animateRotate: true, duration: 1200 },
+               plugins: { legend: { display: false } } }
+  });
+})();
+</script>
+{% endblock %}
